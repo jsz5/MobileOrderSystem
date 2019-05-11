@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "126718237406",
+    "firebase_url": "https://mobileordersystem.firebaseio.com",
+    "project_id": "mobileordersystem",
+    "storage_bucket": "mobileordersystem.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:126718237406:android:036c9dd9121bf577",
+        "android_client_info": {
+          "package_name": "com.example.mobileordersystem"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "126718237406-1gavilicnjsftbg34qta3fac8rlgob7s.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.mobileordersystem",
+            "certificate_hash": "3936dbc58235f88b3fa99007c0f6eb523ca51a7e"
+          }
+        },
+        {
+          "client_id": "126718237406-08f5o4nm2ssa3hvhc7f507kld8dc7aa1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCzidqPwSeHDB5N24eWdNi3tNnhlHDNXYQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "126718237406-08f5o4nm2ssa3hvhc7f507kld8dc7aa1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
