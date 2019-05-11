@@ -15,6 +15,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
+import com.example.mobileordersystem.HomeActivity
 import com.example.mobileordersystem.MainActivity
 
 import com.example.mobileordersystem.R
@@ -104,7 +105,9 @@ class LoginActivity : AppCompatActivity() {
     private fun updateUiWithUser(model: LoggedInUserView) {
         val welcome = getString(R.string.welcome)
         val displayName = model.displayName
-        val intent= Intent(this,MainActivity::class.java)
+        HomeActivity.dispName = displayName
+        val intent= Intent(this,HomeActivity::class.java)
+        intent.putExtra("displayName", displayName)
         startActivity(intent)
         // TODO : initiate successful logged in experience
         Toast.makeText(
