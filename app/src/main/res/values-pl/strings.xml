@@ -13,4 +13,9 @@
     <string name="welcome">Witaj!</string>
     <string name="title_home">Główna</string>
     <string name="title_customer">Klienci</string>
+
+    <string name="password">Hasło</string>
+    <string name="repeat_password">Powtórz hasło</string>
+    <string name="create_account">Utwórz konto</string>
+
 </resources>
