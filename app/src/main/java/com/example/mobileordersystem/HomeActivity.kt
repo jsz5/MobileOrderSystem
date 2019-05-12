@@ -1,10 +1,13 @@
 package com.example.mobileordersystem
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
+import android.view.View
 import android.widget.Toast
+import com.example.mobileordersystem.authorization.ui.login.LoginActivity
 import com.example.mobileordersystem.customer.CustomerFragment
 import com.example.mobileordersystem.equipment.EquipmentFragment
 import com.example.mobileordersystem.order.OrderFragment
@@ -59,6 +62,12 @@ class HomeActivity : AppCompatActivity() {
         transaction.replace(R.id.container, fragment)
         transaction.addToBackStack(null)
         transaction.commit()
+    }
+
+    fun logout(view: View) {
+        val mLoginActivityIntent = Intent(this, LoginActivity::class.java)
+        startActivity(mLoginActivityIntent)
+        finish()
     }
 
 
