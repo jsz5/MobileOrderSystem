@@ -9,8 +9,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".order.OrdersActivity"></activity>
-        <activity android:name=".equipment.EquipmentActivity" />
         <activity
             android:name=".authorization.ui.login.LoginActivity"
             android:label="@string/title_activity_login">

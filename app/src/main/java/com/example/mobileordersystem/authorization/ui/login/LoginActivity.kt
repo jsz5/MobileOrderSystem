@@ -105,7 +105,6 @@ class LoginActivity : AppCompatActivity() {
     private fun updateUiWithUser(model: LoggedInUserView) {
         val welcome = getString(R.string.welcome)
         val displayName = model.displayName
-        HomeActivity.dispName = displayName
         val intent= Intent(this,HomeActivity::class.java)
         intent.putExtra("displayName", displayName)
         startActivity(intent)

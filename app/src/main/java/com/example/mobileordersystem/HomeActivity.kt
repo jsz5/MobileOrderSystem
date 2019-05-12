@@ -2,48 +2,66 @@ package com.example.mobileordersystem
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.os.PersistableBundle
-import android.util.Log
-import com.example.mobileordersystem.Utils.BottomNavigationViewHelper
-import kotlinx.android.synthetic.main.activity_home.*
-import kotlinx.android.synthetic.main.layout_bottom_navigation_view.*
+import android.support.design.widget.BottomNavigationView
+import android.support.v4.app.Fragment
+import android.widget.Toast
+import com.example.mobileordersystem.customer.CustomerFragment
+import com.example.mobileordersystem.equipment.EquipmentFragment
+import com.example.mobileordersystem.order.OrderFragment
 
 
 class HomeActivity : AppCompatActivity() {
 
-    private val TAG = "HomeActivity"
 
-    companion object {
-        lateinit var dispName: String
+    private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
+        when (item.itemId) {
+            R.id.nav_home -> {
+                val homeFragment = HomeFragment.newInstance()
+                openFragment(homeFragment)
+                return@OnNavigationItemSelectedListener true
+            }
+            R.id.nav_equipment -> {
+                val equipmentFragment = EquipmentFragment.newInstance()
+                openFragment(equipmentFragment)
+                return@OnNavigationItemSelectedListener true
+            }
+            R.id.nav_orders -> {
+                val orderFragment = OrderFragment.newInstance()
+                openFragment(orderFragment)
+                return@OnNavigationItemSelectedListener true
+            }
+            R.id.nav_customers -> {
+                val customerFragment = CustomerFragment.newInstance()
+                openFragment(customerFragment)
+                return@OnNavigationItemSelectedListener true
+            }
+            else -> {
+                Toast.makeText(this, "Navigation Error", Toast.LENGTH_SHORT).show()
+            }
+        }
+        false
     }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
-        Log.d(TAG, "onCreate: starting.")
+        val navView: BottomNavigationView = findViewById(R.id.nav_view)
 
-
-        setupBottomNavigationView()
-
-        welcomeTextView.text = "Welcome! $dispName!"
-
+        navView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
+        val homeItem = navView.menu.getItem(0)
+        homeItem.isChecked = true
+        onNavigationItemSelectedListener.onNavigationItemSelected(homeItem)
 
     }
 
-    /*
-   *BottomNavigationView setup
-    */
-    fun setupBottomNavigationView() {
-        Log.d(TAG, "setupBottomNavigationView: setting up BottomNavigationView")
-        val bottomNavigationViewEx = bottomNavViewBar
-        BottomNavigationViewHelper.setupBottomNavigationView(bottomNavigationViewEx)
-        BottomNavigationViewHelper.enableNavigation(this, bottomNavigationViewEx)
-
-        val menu = bottomNavigationViewEx.menu
-        val menuItem = menu.getItem(2)
-        menuItem.isChecked = true
+    private fun openFragment(fragment: Fragment) {
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.container, fragment)
+        transaction.addToBackStack(null)
+        transaction.commit()
     }
+
+
 }
 
 
