@@ -111,6 +111,8 @@ class CreateAccountActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+        
+
 
         if (requestCode == RC_SIGN_IN) {
             val response = IdpResponse.fromResultIntent(data)
@@ -144,25 +146,25 @@ class CreateAccountActivity : AppCompatActivity() {
                                 Toast.LENGTH_SHORT
                             ).show()
                         }
-                        val intent = Intent(this, HomeActivity::class.java)
-                        startActivity(intent)
-                        finish()
-                        return
-                    }
 
-//                    val intent = Intent(this, HomeActivity::class.java)
-//                    startActivity(intent)
-//                    finish()
-//                    return
-                    // ...
-                } else {
-                    // Sign in failed. If response is null the user canceled the
-                    // sign-in flow using the back button. Otherwise check
-                    // response.getError().getErrorCode() and handle the error.
-                    // ...
+                    }
+                    val intent = Intent(this, HomeActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                    return
                 }
+            }else {
+                // Sign in failed. If response is null the user canceled the
+                // sign-in flow using the back button. Otherwise check
+                // response.getError().getErrorCode() and handle the error.
+                // ...
             }
         }
     }
+
+
+
+
+
 
 }
