@@ -144,14 +144,16 @@ class CreateAccountActivity : AppCompatActivity() {
                                 Toast.LENGTH_SHORT
                             ).show()
                         }
-
-
+                        val intent = Intent(this, HomeActivity::class.java)
+                        startActivity(intent)
+                        finish()
+                        return
                     }
 
-                    val intent = Intent(this, HomeActivity::class.java)
-                    startActivity(intent)
-                    finish()
-                    return
+//                    val intent = Intent(this, HomeActivity::class.java)
+//                    startActivity(intent)
+//                    finish()
+//                    return
                     // ...
                 } else {
                     // Sign in failed. If response is null the user canceled the
