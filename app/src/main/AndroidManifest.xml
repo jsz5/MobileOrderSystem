@@ -9,14 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity
-            android:name=".authorization.ui.login.LoginActivity"
-            android:label="@string/title_activity_login">
 
-        </activity>
         <activity android:name=".MainActivity" />
         <activity android:name=".HomeActivity" />
-        <activity android:name=".authorization.CreateAccountActivity">
+        <activity android:name=".authorization.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,7 +20,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".authorization.ForgotPasswordActivity" />
-        <activity android:name=".authorization.LoginActivity" />
     </application>
 
 </manifest>

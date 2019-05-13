@@ -7,10 +7,11 @@ import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
 import android.view.View
 import android.widget.Toast
-import com.example.mobileordersystem.authorization.ui.login.LoginActivity
+import com.example.mobileordersystem.authorization.LoginActivity
 import com.example.mobileordersystem.customer.CustomerFragment
 import com.example.mobileordersystem.equipment.EquipmentFragment
 import com.example.mobileordersystem.order.OrderFragment
+import com.firebase.ui.auth.AuthUI
 
 
 class HomeActivity : AppCompatActivity() {
@@ -65,9 +66,13 @@ class HomeActivity : AppCompatActivity() {
     }
 
     fun logout(view: View) {
-        val mLoginActivityIntent = Intent(this, LoginActivity::class.java)
-        startActivity(mLoginActivityIntent)
-        finish()
+        AuthUI.getInstance()
+            .signOut(this)
+            .addOnCompleteListener {
+                val intent = Intent(this, LoginActivity::class.java)
+                startActivity(intent)
+            }
+
     }
 
 
