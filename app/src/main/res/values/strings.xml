@@ -15,11 +15,8 @@
     <string name="login_failed">"Login failed"</string>
     <string name="title_home">Home</string>
     <string name="title_customer">Customers</string>
-
-    <string name="email" translatable="false">Email</string>
+    <string name="create_account">Create Account</string>
     <string name="password">Password</string>
     <string name="repeat_password">Repeat password</string>
-    <string name="create_account">Create account</string>
-
 
 </resources>

@@ -10,7 +10,7 @@ import com.example.mobileordersystem.R
 class CustomerFragment: Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
-        inflater.inflate(R.layout.fragment_equipment, container, false)
+        inflater.inflate(R.layout.fragment_customer, container, false)
 
     companion object {
         fun newInstance(): CustomerFragment = CustomerFragment()
