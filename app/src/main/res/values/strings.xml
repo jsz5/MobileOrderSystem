@@ -22,11 +22,25 @@
     <string name="create_account">Create account</string>
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>
-    <string name="reset_password">Change Password</string>
-    <string name="logout">Logout</string>
-    <string name="delete_account">Delete Account</string>
-    <string name="settings">Account Settings</string>
-    <string name="alertDelete">Your account will be deleted. Are you sure you want to continue?</string>
+
+    <string name="reset_password">Change password</string>
+    <string name="logout">Log out</string>
+    <string name="delete_account">Delete account</string>
+    <string name="settings">Account settings</string>
+    <string name="alertDelete">Twoje konto zostanie usunięte. Czy chcesz kontynować?</string>
+
+
+
+    <string name="adding_item">Adding item</string>
+    <string name="add_button">Add</string>
+    <string name="item_name">Item name</string>
+    <string name="amount">Amount</string>
+    <string name="price_day">Price/day</string>
+    <string name="enter_name">Enter the name here</string>
+    <string name="enter_amount">Enter the amount here</string>
+    <string name="enter_price">Enter the price/day here</string>
+
+
 
 
 </resources>

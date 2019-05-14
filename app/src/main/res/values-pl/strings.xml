@@ -26,4 +26,14 @@
     <string name="settings">Ustawienia konta</string>
     <string name="alertDelete">Twoje konto zostanie usunięte. Czy chcesz kontynować?</string>
 
+    <string name="adding_item">Dodawanie przedmiotu</string>
+    <string name="add_button">Dodaj</string>
+    <string name="item_name">Nazwa przedmiotu</string>
+    <string name="amount">Ilość</string>
+    <string name="price_day">Cena/dzień</string>
+    <string name="enter_name">Wpisz nazwe tutaj</string>
+    <string name="enter_amount">Wpisz ilość tutaj</string>
+    <string name="enter_price">Wpisz cene/dzien tutaj</string>
+
+
 </resources>
