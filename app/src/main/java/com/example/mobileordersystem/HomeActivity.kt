@@ -20,6 +20,7 @@ import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_home.*
 
 
+
 class HomeActivity : AppCompatActivity() {
 
     val TAG = "HomeActivity"
@@ -158,7 +159,7 @@ class HomeActivity : AppCompatActivity() {
 
     }
 
-    fun logout(view: View) {
+    private fun logout() {
         AuthUI.getInstance()
             .signOut(this)
             .addOnCompleteListener {
