@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+    <group android:id="@+id/grp1" android:checkableBehavior="single" >
+        <item
+            android:id="@+id/passwordChange"
+            android:title="@string/reset_password"
+            android:icon="@drawable/change_password"
+            />
+        <item
+            android:id="@+id/deleteAccount"
+            android:title="@string/delete_account"
+            android:icon="@drawable/delete_account"
+            />
+    </group>
+    <group android:id="@+id/grp2" android:checkableBehavior="single" >
+
+        <item
+            android:padding="10dp"
+            android:id="@+id/logut"
+            android:title="@string/logout"
+            android:icon="@drawable/logout"
+            />
+    </group>
+
+
+</menu>

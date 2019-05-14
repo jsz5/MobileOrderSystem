@@ -7,28 +7,79 @@
     android:layout_height="match_parent"
     tools:context=".HomeActivity">
 
-    <LinearLayout
-        android:id="@+id/toolbar"
+    <android.support.v4.widget.DrawerLayout
+        android:id="@+id/drawer_layout"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/container"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="33dp"
+        tools:layout_editor_absoluteY="46dp">
 
-        <Button
-            android:id="@+id/button"
+        <!-- Nie umiem tu rysowac xd TODO -->
+
+        <TextView
+            android:id="@+id/textView5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="0"
-            android:background="#00CFBDBD"
-            android:onClick="logout"
-            android:text="Logout"
-            app:cornerRadius="0dp"
-            app:icon="@drawable/ic_logout" />
+            android:layout_marginTop="20dp"
+            android:gravity="center_horizontal"
+            android:text="Najblizsze zamowienia"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="parent"/>
 
-    </LinearLayout>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textView5">
+
+        </android.support.v7.widget.RecyclerView>
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Aktualnie wypozyczone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textView5"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textView6"/>
+
+        <LinearLayout
+            android:id="@+id/drawer_header"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:alpha="1.0"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/drawer_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:alpha="1.0"
+                android:background="@color/colorAccent"
+                android:paddingStart="15dp"
+                android:paddingTop="90dp"
+                android:paddingBottom="15dp"
+                android:text="@string/settings"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+
+            <android.support.design.widget.NavigationView
+                android:id="@+id/navigation_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:alpha="1.0"
+                app:menu="@menu/drawer_menu" />
+        </LinearLayout>
+    </android.support.v4.widget.DrawerLayout>
 
     <FrameLayout
         android:id="@id/container"
@@ -38,7 +89,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/nav_view"
         app:layout_constraintStart_toStartOf="@+id/nav_view"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+        app:layout_constraintTop_toBottomOf="parent" />
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/nav_view"
