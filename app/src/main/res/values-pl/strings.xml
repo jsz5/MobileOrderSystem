@@ -17,5 +17,13 @@
     <string name="password">Hasło</string>
     <string name="repeat_password">Powtórz hasło</string>
     <string name="create_account">Utwórz konto</string>
+    <string name="drawer_open">Otwórz</string>
+    <string name="drawer_close">Zamknij</string>
+
+    <string name="reset_password">Zmień hasło</string>
+    <string name="logout">Wyloguj</string>
+    <string name="delete_account">Usuń konto</string>
+    <string name="settings">Ustawienia konta</string>
+    <string name="alertDelete">Twoje konto zostanie usunięte. Czy chcesz kontynować?</string>
 
 </resources>
