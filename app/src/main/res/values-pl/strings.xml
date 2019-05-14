@@ -25,6 +25,12 @@
     <string name="delete_account">Usuń konto</string>
     <string name="settings">Ustawienia konta</string>
     <string name="alertDelete">Twoje konto zostanie usunięte. Czy chcesz kontynować?</string>
+    <string name="newPasswordShow">Nowe hasło</string>
+    <string name="repeatPasswordShow">Powtórz hasło</string>
+    <string name="save">Zapisz</string>
+    <string name="oldPasswordShow">Stare hasło</string>
+    <string name="passwordChangeSucces">Hasło zostało zmienione pomyślnie</string>
+    <string name="passwordChangeFail">Nie udało się zmienić hasła</string>
 
     <string name="adding_item">Dodawanie przedmiotu</string>
     <string name="add_button">Dodaj</string>

@@ -10,6 +10,7 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AlertDialog
 import android.view.View
 import android.widget.Toast
+import com.example.mobileordersystem.authorization.ChangePasswordActivity
 import com.example.mobileordersystem.authorization.LoginActivity
 import com.example.mobileordersystem.customer.CustomerFragment
 import com.example.mobileordersystem.equipment.EquipmentFragment
@@ -80,7 +81,7 @@ class HomeActivity : AppCompatActivity() {
         // Set navigation view navigation item selected listener
         navigation_view.setNavigationItemSelectedListener{
             when (it.itemId){
-                R.id.passwordChange ->  Toast.makeText(applicationContext,"Zmień hasło", Toast.LENGTH_SHORT).show()
+                R.id.passwordChange -> changePassword()
                 R.id.deleteAccount -> showDeleteAccountDialog()
                 R.id.logut ->logout()
             }
@@ -113,6 +114,10 @@ class HomeActivity : AppCompatActivity() {
                     startActivity(intent)
                 }
             }
+    }
+    private fun changePassword(){
+        val intent = Intent(this, ChangePasswordActivity::class.java)
+        startActivity(intent)
     }
     private fun showDeleteAccountDialog()
     {
