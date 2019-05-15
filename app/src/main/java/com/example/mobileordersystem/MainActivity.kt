@@ -31,9 +31,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         databaseReference = FirebaseDatabase.getInstance().reference
         myAdapter = EquipmentAdapter(this, equipmentList)
-        equipmentListView.adapter = myAdapter
-        getEquipmentList()
-        updateEquipment("LeYQzZVbncUvj8FdPtG", "update361", 76, 5f)
+//        equipmentListView.adapter = myAdapter
+//        getEquipmentList()
+//        updateEquipment("LeYQzZVbncUvj8FdPtG", "update361", 76, 5f)
 
         //        createEquipment("głośnik", 32, 90.3f)
 //        createCustomer(null,"klient","Nazwisko", "Firma",90909090,"mail@gmail.com",

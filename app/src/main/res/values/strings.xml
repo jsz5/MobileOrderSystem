@@ -27,9 +27,13 @@
     <string name="logout">Log out</string>
     <string name="delete_account">Delete account</string>
     <string name="settings">Account settings</string>
-    <string name="alertDelete">Twoje konto zostanie usunięte. Czy chcesz kontynować?</string>
-
-
+    <string name="alertDelete">Your account will be deleted. Are you sure you want to proceed?</string>
+    <string name="newPasswordShow">New password</string>
+    <string name="repeatPasswordShow">Repeat password</string>
+    <string name="oldPasswordShow">Old password</string>
+    <string name="save">Save</string>
+    <string name="passwordChangeSucces">Password change has been successful</string>
+    <string name="passwordChangeFail">There was an error while changing the password</string>
 
     <string name="adding_item">Adding item</string>
     <string name="add_button">Add</string>
@@ -39,6 +43,8 @@
     <string name="enter_name">Enter the name here</string>
     <string name="enter_amount">Enter the amount here</string>
     <string name="enter_price">Enter the price/day here</string>
+
+
 
 
 

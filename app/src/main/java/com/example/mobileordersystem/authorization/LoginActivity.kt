@@ -3,18 +3,12 @@ package com.example.mobileordersystem.authorization
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.support.annotation.NonNull
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
-import android.widget.Toast
 import com.example.mobileordersystem.HomeActivity
-import com.example.mobileordersystem.R
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.IdpResponse
-import com.google.android.gms.auth.api.Auth
-import com.google.firebase.auth.ActionCodeSettings
 import com.google.firebase.auth.FirebaseAuth
-
+import com.google.firebase.auth.FirebaseAuth.AuthStateListener
 
 
 class LoginActivity : AppCompatActivity() {
@@ -47,14 +41,30 @@ class LoginActivity : AppCompatActivity() {
 //                .build(),
 //            RC_SIGN_IN
 //        )
+//        startActivityForResult(
+//                    AuthUI.getInstance()
+//                        .createSignInIntentBuilder()
+//                        .setAvailableProviders(providers)
+//                        .build(),
+//                    RC_SIGN_IN
+//                )
+        FirebaseAuth.getInstance().addAuthStateListener(AuthStateListener {
+            val user = FirebaseAuth.getInstance().currentUser
+            if (user != null) {
+                val intent = Intent(this@LoginActivity, HomeActivity::class.java)
+                startActivity(intent)
+                finish()
+            }else{
 
-        startActivityForResult(
-            AuthUI.getInstance()
-                .createSignInIntentBuilder()
-                .setAvailableProviders(providers)
-                .build(),
-            RC_SIGN_IN
-        )
+                startActivityForResult(
+                    AuthUI.getInstance()
+                        .createSignInIntentBuilder()
+                        .setAvailableProviders(providers)
+                        .build(),
+                    RC_SIGN_IN
+                )
+            }
+        })
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -65,21 +75,28 @@ class LoginActivity : AppCompatActivity() {
 
             if (resultCode == Activity.RESULT_OK) {
                 // Successfully signed in
-
                 val intent = Intent(this, HomeActivity::class.java)
-                    startActivity(intent)
+                startActivity(intent)
+                finish()
 
                 // ...
             } else {
-//                val intent = Intent(this, HomeActivity::class.java)
-//                startActivity(intent)
+                if (response == null) {
+                    finish()
 
-                // Sign in failed. If response is null the user canceled the
-                // sign-in flow using the back button. Otherwise check
-                // response.getError().getErrorCode() and handle the error.
-                // ...
+                    // Sign in failed. If response is null the user canceled the
+                    // sign-in flow using the back button. Otherwise check
+                    // response.getError().getErrorCode() and handle the error.
+                    // ...
+                }
+                finish()
             }
         }
+    }
+
+    override fun onBackPressed() {
+        finish();
+        super.onBackPressed()
     }
 
 //
