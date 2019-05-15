@@ -80,8 +80,16 @@ class LoginActivity : AppCompatActivity() {
                 val user = FirebaseAuth.getInstance().currentUser
                 if(user != null) {
                     val intent = Intent(this, HomeActivity::class.java)
-                    intent.putExtra("user", user.email)
-                    intent.putExtra("displayName", user.displayName)
+                    lateinit var email:String
+                    lateinit var displayName: String
+                    user?.let {
+                        for (profile in it.providerData) {
+                            email = profile.email.toString()
+                            displayName=profile.displayName.toString()
+                        }
+                    }
+                    intent.putExtra("user", email)
+                    intent.putExtra("displayName", displayName)
                     startActivity(intent)
                 }
                 finish()
