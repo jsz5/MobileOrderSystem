@@ -43,10 +43,8 @@
     <string name="enter_name">Enter the name here</string>
     <string name="enter_amount">Enter the amount here</string>
     <string name="enter_price">Enter the price/day here</string>
-
-
-
-
+    <string name="label_activeOrders">Active Orders</string>
+    <string name="label_recent_orders">Recent Orders</string>
 
 
 </resources>

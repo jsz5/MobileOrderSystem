@@ -1,9 +1,11 @@
 package com.example.mobileordersystem
 
 import android.content.Intent
+import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
+import android.support.design.widget.NavigationView
 import android.support.v4.app.Fragment
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
@@ -19,7 +21,7 @@ import com.example.mobileordersystem.order.OrderFragment
 import com.firebase.ui.auth.AuthUI
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_home.*
-
+import kotlinx.android.synthetic.main.drawer_header.*
 
 
 class HomeActivity : AppCompatActivity() {
@@ -29,9 +31,11 @@ class HomeActivity : AppCompatActivity() {
     var currentid = 0
     val fragments = ArrayList<Fragment>()
     val fragmentStack = ArrayList<Int>()
+    lateinit var displayName : String
+    lateinit var userEmail : String
 
 
-    private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
+    private val bottomNavListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.nav_home -> {
                 openFragment(0, true)
@@ -56,10 +60,48 @@ class HomeActivity : AppCompatActivity() {
         false
     }
 
+    private val drawerNavListener = NavigationView.OnNavigationItemSelectedListener { item ->
+        when (item.itemId){
+            R.id.passwordChange -> changePassword()
+            R.id.deleteAccount -> showDeleteAccountDialog()
+            R.id.logout -> logout()
+        }
+        drawer_layout.closeDrawer(GravityCompat.START)
+        true
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
-        val navView: BottomNavigationView = findViewById(R.id.nav_view)
+
+        setUpFragments()
+
+        displayName = intent.getStringExtra("displayName")
+        userEmail = intent.getStringExtra("user")
+
+        val drawerToggle = object : ActionBarDrawerToggle(this, drawer_layout, R.string.drawer_open, R.string.drawer_close) {
+            override fun onDrawerSlide(drawerView: View, slideOffset: Float) {
+                super.onDrawerSlide(drawerView, slideOffset)
+                dispNameCont.text = displayName
+                emailCont.text = userEmail
+            }
+            override fun onDrawerOpened(drawerView: View) {
+                super.onDrawerOpened(drawerView)
+
+            }
+        }
+        drawerToggle.isDrawerIndicatorEnabled = true
+        drawer_layout.addDrawerListener(drawerToggle)
+        drawerToggle.syncState()
+
+        drawer_layout.openDrawer(GravityCompat.START)
+        drawer_layout.closeDrawer(GravityCompat.START)
+        navigation_view.setNavigationItemSelectedListener(drawerNavListener)
+
+    }
+
+    private fun setUpFragments() {
+        val navView = nav_view
 
         fragments.add(HomeFragment.newInstance())
         fragments.add(EquipmentFragment.newInstance())
@@ -73,38 +115,11 @@ class HomeActivity : AppCompatActivity() {
         }
         transaction.commit()
 
-        navView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
+        navView.setOnNavigationItemSelectedListener(bottomNavListener)
         val homeItem = navView.menu.getItem(0)
         homeItem.isChecked = true
-        onNavigationItemSelectedListener.onNavigationItemSelected(homeItem)
-        val drawerToggle:ActionBarDrawerToggle = object : ActionBarDrawerToggle(
-            this,
-            drawer_layout,
-            R.string.drawer_open,
-            R.string.drawer_close
-        ){
-            override fun onDrawerClosed(view:View){
-                super.onDrawerClosed(view)
-            }
-            override fun onDrawerOpened(drawerView: View){
-                super.onDrawerOpened(drawerView)
-            }
-        }
-        // Configure the drawer layout to add listener and show icon on toolbar
-        drawerToggle.isDrawerIndicatorEnabled = true
-        drawer_layout.addDrawerListener(drawerToggle)
-        drawerToggle.syncState()
-        // Set navigation view navigation item selected listener
-        navigation_view.setNavigationItemSelectedListener{
-            when (it.itemId){
-                R.id.passwordChange -> changePassword()
-                R.id.deleteAccount -> showDeleteAccountDialog()
-                R.id.logut ->logout()
-            }
-            // Close the drawer
-            drawer_layout.closeDrawer(GravityCompat.START)
-            true
-        }
+        bottomNavListener.onNavigationItemSelected(homeItem)
+
     }
 
     private fun openFragment(id: Int, addToStack : Boolean) {
@@ -137,7 +152,9 @@ class HomeActivity : AppCompatActivity() {
 
 
     override fun onBackPressed() {
-        if(fragmentStack.isEmpty()) {
+        if(drawer_layout.isDrawerOpen(GravityCompat.START)) {
+            drawer_layout.closeDrawer(GravityCompat.START)
+        } else if(fragmentStack.isEmpty()) {
             if(currentid == 0) {
                 super.onBackPressed()
             } else {
@@ -171,11 +188,6 @@ class HomeActivity : AppCompatActivity() {
         finish()
     }
 
-    fun onClick(view: View) {
-        if(currentid == 1) {
-            (fragments[currentid] as EquipmentFragment).click()
-        }
-    }
     private fun deleteAccount(){
         val user = FirebaseAuth.getInstance().currentUser
         user?.delete()

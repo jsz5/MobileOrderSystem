@@ -52,6 +52,8 @@ class LoginActivity : AppCompatActivity() {
             val user = FirebaseAuth.getInstance().currentUser
             if (user != null) {
                 val intent = Intent(this@LoginActivity, HomeActivity::class.java)
+                intent.putExtra("user", user.email)
+                intent.putExtra("displayName", user.displayName)
                 startActivity(intent)
                 finish()
             }else{
@@ -75,10 +77,14 @@ class LoginActivity : AppCompatActivity() {
 
             if (resultCode == Activity.RESULT_OK) {
                 // Successfully signed in
-                val intent = Intent(this, HomeActivity::class.java)
-                startActivity(intent)
+                val user = FirebaseAuth.getInstance().currentUser
+                if(user != null) {
+                    val intent = Intent(this, HomeActivity::class.java)
+                    intent.putExtra("user", user.email)
+                    intent.putExtra("displayName", user.displayName)
+                    startActivity(intent)
+                }
                 finish()
-
                 // ...
             } else {
                 if (response == null) {
@@ -95,7 +101,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        finish();
+        finish()
         super.onBackPressed()
     }
 
