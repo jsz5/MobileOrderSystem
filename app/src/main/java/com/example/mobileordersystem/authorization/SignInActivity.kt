@@ -9,6 +9,7 @@ import com.google.firebase.auth.FirebaseUser
 import android.widget.Toast
 import android.util.Log
 import android.text.TextUtils
+import android.widget.ProgressBar
 import com.example.mobileordersystem.HomeActivity
 import com.example.mobileordersystem.R
 import kotlinx.android.synthetic.main.sign_in.*
@@ -29,13 +30,18 @@ class SignInActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         val user = FirebaseAuth.getInstance().currentUser
-        if (user!!.isEmailVerified) alreadySigned()
+        if (user!=null && user.isEmailVerified){
+            alreadySigned(user.email.toString(), user.displayName.toString())
+        }
 
 
     }
-    private fun alreadySigned() {
+    private fun alreadySigned(email: String, displayName:String) {
         val intent = Intent(this@SignInActivity, HomeActivity::class.java)
+        intent.putExtra("user", email)
+        intent.putExtra("displayName", displayName)
         startActivity(intent)
+        finish()
     }
     fun singUp(view: View){
         val intent = Intent(this@SignInActivity, SignUpActivity::class.java)
@@ -43,6 +49,7 @@ class SignInActivity : AppCompatActivity() {
     }
 
     fun signIn(view: View) {
+        findViewById<ProgressBar>(R.id.progressBar).visibility=View.VISIBLE
         val email = emailInput.text.toString()
         val password = passwordInput.text.toString()
         if (!validateForm(email, password)) {
@@ -51,10 +58,11 @@ class SignInActivity : AppCompatActivity() {
         mAuth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful && mAuth.currentUser!!.isEmailVerified) {
-                    alreadySigned()
+                    alreadySigned(email, FirebaseAuth.getInstance().currentUser!!.displayName.toString())
                 } else {
                     Log.e(TAG, "signIn: Fail!", task.exception)
                     Toast.makeText(applicationContext, "Authentication failed!", Toast.LENGTH_SHORT).show()
+                    findViewById<ProgressBar>(R.id.progressBar).visibility=View.GONE
                 }
             }
     }
