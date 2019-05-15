@@ -15,6 +15,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.equipment_item.view.*
 import kotlin.collections.ArrayList
 
 
@@ -30,7 +31,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         databaseReference = FirebaseDatabase.getInstance().reference
-        myAdapter = EquipmentAdapter(this, equipmentList)
+        myAdapter = EquipmentAdapter( equipmentList, this)
 //        equipmentListView.adapter = myAdapter
 //        getEquipmentList()
 //        updateEquipment("LeYQzZVbncUvj8FdPtG", "update361", 76, 5f)
@@ -46,14 +47,14 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    private fun createEquipment(name: String, amount: Int, price: Float) {
-        AsyncTask.execute {
-            val equipmentReference = FirebaseDatabase.getInstance().getReference("Equipment")
-            val id = equipmentReference.push().key as String
-            val equipment = Equipment(id, name, amount, price)
-            equipmentReference.child(id).setValue(equipment);
-        }
-    }
+//    private fun createEquipment(name: String, amount: Int, price: Float) {
+//        AsyncTask.execute {
+//            val equipmentReference = FirebaseDatabase.getInstance().getReference("Equipment")
+//            val id = equipmentReference.push().key as String
+//            val equipment = Equipment(id, name, amount, price)
+//            equipmentReference.child(id).setValue(equipment);
+//        }
+//    }
 
     private fun createCustomer(
         orderId: String? = null, name: String, surname: String, companyName: String,
@@ -108,7 +109,34 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-
-
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

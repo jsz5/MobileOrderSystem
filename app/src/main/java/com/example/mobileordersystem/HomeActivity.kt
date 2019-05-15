@@ -10,6 +10,7 @@ import android.support.v4.app.Fragment
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AlertDialog
+import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.View
 import android.widget.Toast
@@ -105,6 +106,7 @@ class HomeActivity : AppCompatActivity() {
 
         fragments.add(HomeFragment.newInstance())
         fragments.add(EquipmentFragment.newInstance())
+        (fragments[1] as EquipmentFragment).setAdapter(this)
         fragments.add(OrderFragment.newInstance())
         fragments.add(CustomerFragment.newInstance())
 
