@@ -17,7 +17,7 @@ class ChangePasswordActivity : AppCompatActivity() {
         setContentView(R.layout.change_password)
     }
     fun savePassword(view: View) {
-        val newPassword = findViewById<EditText>(R.id.newPasswordInput).text.toString()
+        val newPassword = findViewById<EditText>(R.id.passwordInput).text.toString()
         val oldPassword = findViewById<EditText>(R.id.oldPasswordInput).text.toString()
         val user = FirebaseAuth.getInstance().currentUser
         lateinit var email: String

@@ -16,6 +16,7 @@ import android.view.View
 import android.widget.Toast
 import com.example.mobileordersystem.authorization.ChangePasswordActivity
 import com.example.mobileordersystem.authorization.LoginActivity
+import com.example.mobileordersystem.authorization.SignInActivity
 import com.example.mobileordersystem.customer.CustomerFragment
 import com.example.mobileordersystem.equipment.EquipmentFragment
 import com.example.mobileordersystem.order.OrderFragment
@@ -76,9 +77,10 @@ class HomeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_home)
 
         setUpFragments()
-
-        displayName = intent.getStringExtra("displayName")
-        userEmail = intent.getStringExtra("user")
+        displayName = "displayName"
+        userEmail = "USer"
+//        displayName = intent.getStringExtra("displayName")
+//        userEmail = intent.getStringExtra("user")
 
         val drawerToggle = object : ActionBarDrawerToggle(this, drawer_layout, R.string.drawer_open, R.string.drawer_close) {
             override fun onDrawerSlide(drawerView: View, slideOffset: Float) {
@@ -183,7 +185,7 @@ class HomeActivity : AppCompatActivity() {
         AuthUI.getInstance()
             .signOut(this)
             .addOnCompleteListener {
-                val intent = Intent(this, LoginActivity::class.java)
+                val intent = Intent(this, SignInActivity::class.java)
                 startActivity(intent)
                 finish()
             }
@@ -195,7 +197,7 @@ class HomeActivity : AppCompatActivity() {
         user?.delete()
             ?.addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    val intent = Intent(this, LoginActivity::class.java)
+                    val intent = Intent(this, SignInActivity::class.java)
                     startActivity(intent)
                     finish()
                 }

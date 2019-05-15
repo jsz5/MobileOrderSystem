@@ -31,6 +31,14 @@
     <string name="oldPasswordShow">Stare hasło</string>
     <string name="passwordChangeSucces">Hasło zostało zmienione pomyślnie</string>
     <string name="passwordChangeFail">Nie udało się zmienić hasła</string>
+    <string name="name">Imię i nazwisko</string>
+    <string name="forgotPassword">Zresetuj hasło</string>
+    <string name="signIn">Zaloguj</string>
+    <string name="signUp">Zarejestruj</string>
+    <string name="checkEmailTitle">Sprawdź swoją skrzynkę pocztową! </string>
+    <string name="checkEmail">Email weryfikacyjny został wysłany na adres</string>
+    <string name="continueSignUp">Kontunuuj </string>
+    <string name="notVerified">Email nie został zweryfikowany</string>
 
     <string name="adding_item">Dodawanie przedmiotu</string>
     <string name="add_button">Dodaj</string>

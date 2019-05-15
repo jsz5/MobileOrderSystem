@@ -4,9 +4,12 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
+import android.widget.Toast
 import com.example.mobileordersystem.HomeActivity
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.IdpResponse
+import com.google.firebase.auth.ActionCodeSettings
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuth.AuthStateListener
 
@@ -17,7 +20,7 @@ class LoginActivity : AppCompatActivity() {
         AuthUI.IdpConfig.EmailBuilder().build())
     val RC_SIGN_IN = 100
     override fun onCreate(savedInstanceState: Bundle?) {
-
+//
         super.onCreate(savedInstanceState)
 //        val actionCodeSettings = ActionCodeSettings.newBuilder()
 //            .setUrl("https://mobileordersystem.page.link/g3bg")
@@ -52,8 +55,16 @@ class LoginActivity : AppCompatActivity() {
             val user = FirebaseAuth.getInstance().currentUser
             if (user != null) {
                 val intent = Intent(this@LoginActivity, HomeActivity::class.java)
-                intent.putExtra("user", user.email)
-                intent.putExtra("displayName", user.displayName)
+                lateinit var email:String
+                lateinit var displayName: String
+                user.let {
+                    for (profile in it.providerData) {
+                        email = profile.email.toString()
+                        displayName=profile.displayName.toString()
+                    }
+                }
+                intent.putExtra("user", email)
+                intent.putExtra("displayName", displayName)
                 startActivity(intent)
                 finish()
             }else{
@@ -82,7 +93,7 @@ class LoginActivity : AppCompatActivity() {
                     val intent = Intent(this, HomeActivity::class.java)
                     lateinit var email:String
                     lateinit var displayName: String
-                    user?.let {
+                    user.let {
                         for (profile in it.providerData) {
                             email = profile.email.toString()
                             displayName=profile.displayName.toString()
@@ -116,7 +127,7 @@ class LoginActivity : AppCompatActivity() {
 //
 //
 //    }
-//
+////
 //    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 //        super.onActivityResult(requestCode, resultCode, data)
 //        Log.i("czemu", "czemu")
@@ -162,9 +173,18 @@ class LoginActivity : AppCompatActivity() {
 //                        Log.i("cos", "pppp")
 //
 //                    }
-//                    Log.i("tamto", "aaa")
-//                    val intent = Intent(this, HomeActivity::class.java)
-//                    startActivity(intent)
+//                    FirebaseAuth.getInstance().currentUser?.reload()?.addOnSuccessListener {
+//                            void ->
+//                        val user2 = FirebaseAuth.getInstance().currentUser
+//
+//                        if(user2 != null && user2.isEmailVerified ){
+//                            Toast.makeText(this,"Inside of if",Toast.LENGTH_SHORT).show()
+//                            startActivity(Intent(this, HomeActivity::class.java))
+//                        }
+//                    }
+////                    Log.i("tamto", "aaa")
+////                    val intent = Intent(this, HomeActivity::class.java)
+////                    startActivity(intent)
 //
 //                }
 //            }else {
@@ -175,8 +195,8 @@ class LoginActivity : AppCompatActivity() {
 //            }
 //        }
 //    }
-
-
+//
+//
 
 
 
