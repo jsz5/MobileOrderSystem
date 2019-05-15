@@ -103,6 +103,7 @@ class HomeActivity : AppCompatActivity() {
             .addOnCompleteListener {
                 val intent = Intent(this, LoginActivity::class.java)
                 startActivity(intent)
+                finish()
             }
     }
     private fun deleteAccount(){
@@ -112,6 +113,7 @@ class HomeActivity : AppCompatActivity() {
                 if (task.isSuccessful) {
                     val intent = Intent(this, LoginActivity::class.java)
                     startActivity(intent)
+                    finish()
                 }
             }
     }
@@ -133,6 +135,7 @@ class HomeActivity : AppCompatActivity() {
         val dialog: AlertDialog = builder.create()
         dialog.show()
     }
+
 
 
 }

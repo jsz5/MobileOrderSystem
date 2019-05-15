@@ -75,10 +75,9 @@ class LoginActivity : AppCompatActivity() {
 
             if (resultCode == Activity.RESULT_OK) {
                 // Successfully signed in
-
-
                 val intent = Intent(this, HomeActivity::class.java)
                 startActivity(intent)
+                finish()
 
                 // ...
             } else {
@@ -90,6 +89,7 @@ class LoginActivity : AppCompatActivity() {
                     // response.getError().getErrorCode() and handle the error.
                     // ...
                 }
+                finish()
             }
         }
     }
