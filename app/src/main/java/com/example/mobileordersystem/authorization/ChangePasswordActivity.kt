@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.EditText
+import android.widget.ProgressBar
 import android.widget.Toast
 import com.example.mobileordersystem.HomeActivity
 import com.example.mobileordersystem.R
@@ -17,7 +18,8 @@ class ChangePasswordActivity : AppCompatActivity() {
         setContentView(R.layout.change_password)
     }
     fun savePassword(view: View) {
-        val newPassword = findViewById<EditText>(R.id.passwordInput).text.toString()
+        findViewById<ProgressBar>(R.id.progressBar).visibility=View.VISIBLE
+        val newPassword = findViewById<EditText>(R.id.newPasswordInput).text.toString()
         val oldPassword = findViewById<EditText>(R.id.oldPasswordInput).text.toString()
         val user = FirebaseAuth.getInstance().currentUser
         lateinit var email: String
@@ -34,10 +36,12 @@ class ChangePasswordActivity : AppCompatActivity() {
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
                             Toast.makeText(this, R.string.passwordChangeSucces, Toast.LENGTH_LONG).show();
+//                            TODO:: wyloguj użytkownika i do strony logowania
                             val intent = Intent(this@ChangePasswordActivity, HomeActivity::class.java)
                             startActivity(intent)
                             finish()
                         } else {
+                            findViewById<ProgressBar>(R.id.progressBar).visibility=View.GONE
                             Toast.makeText(this, R.string.passwordChangeFail, Toast.LENGTH_LONG).show();
                         }
                     }

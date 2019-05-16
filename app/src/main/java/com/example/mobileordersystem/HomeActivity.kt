@@ -77,8 +77,8 @@ class HomeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_home)
 
         setUpFragments()
-        displayName = intent.getStringExtra("displayName")
-        userEmail = intent.getStringExtra("user")
+        displayName = "displayName"
+        userEmail = "user"
 
         val drawerToggle = object : ActionBarDrawerToggle(this, drawer_layout, R.string.drawer_open, R.string.drawer_close) {
             override fun onDrawerSlide(drawerView: View, slideOffset: Float) {
