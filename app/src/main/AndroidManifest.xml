@@ -10,9 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".authorization.ChangePasswordActivity" />
+        <activity android:name=".authorization.SignUpActivity"></activity>
         <activity android:name=".MainActivity" />
         <activity android:name=".HomeActivity" />
-        <activity android:name=".authorization.LoginActivity">
+        <activity android:name=".authorization.SignInActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<!--<android.support.v7.widget.Toolbar-->
+    <!--android:id="@+id/toolbar"-->
+    <!--xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="50dp"-->
+    <!--android:orientation="vertical"-->
+    <!--android:background="@color/colorAccent">-->
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="false">
@@ -18,7 +26,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/signIn"
+            android:text="@string/signUp"
             android:textSize="18sp"
             android:textAllCaps="true"
             android:textColor="@color/white"/>
@@ -35,7 +43,7 @@
         android:indeterminate="true"
         android:visibility="invisible"
         />
-    <LinearLayout
+    <LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_below="@id/progressBar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -48,40 +56,39 @@
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:layout_weight="0.5"
-            android:text="@string/oldPasswordShow" />
+            android:text="@string/email" />
 
         <EditText
-            android:id="@+id/oldPasswordInput"
+            android:id="@+id/emailInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0.15"
             android:ems="10"
-            android:inputType="textPassword" />
-
+            android:inputType="textEmailAddress" />
         <TextView
-            android:id="@+id/forgotPassword"
+            android:id="@+id/name"
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:layout_weight="0.5"
-            android:text="@string/newPasswordShow" />
+            android:text="@string/name" />
 
         <EditText
-            android:id="@+id/newPasswordInput"
+            android:id="@+id/nameInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0.15"
             android:ems="10"
-            android:inputType="textPassword" />
+            android:inputType="textEmailAddress" />
 
         <TextView
-            android:id="@+id/repeatPasswordShow"
+            android:id="@+id/passwordShow"
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:layout_weight="0"
-            android:text="@string/repeat_password" />
+            android:text="@string/prompt_password" />
 
         <EditText
-            android:id="@+id/repeatPasswordInput"
+            android:id="@+id/passwordInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0.25"
@@ -96,11 +103,11 @@
             android:layout_marginBottom="5dp"
             android:layout_weight="0"
             android:backgroundTint="@color/colorPrimary"
-            android:onClick="savePassword"
-            android:text="@string/save" />
+            android:onClick="signUp"
+            android:text="@string/signUp" />
 
     </LinearLayout>
     </RelativeLayout>
 </ScrollView>
-
+<!--</android.support.v7.widget.Toolbar>-->
 

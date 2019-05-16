@@ -34,6 +34,14 @@
     <string name="save">Save</string>
     <string name="passwordChangeSucces">Password change has been successful</string>
     <string name="passwordChangeFail">There was an error while changing the password</string>
+    <string name="name">Name</string>
+    <string name="forgotPassword">Forgot password</string>
+    <string name="signIn">Sing in</string>
+    <string name="signUp">Sign up</string>
+    <string name="checkEmailTitle">Check your email account! </string>
+    <string name="checkEmail">Verification email has been sent to your account </string>
+    <string name="continueSignUp">Continue </string>
+    <string name="notVerified">Email is not verified</string>
 
     <string name="adding_item">Adding item</string>
     <string name="add_button">Add</string>
