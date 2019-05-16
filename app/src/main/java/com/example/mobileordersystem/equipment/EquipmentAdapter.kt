@@ -1,14 +1,14 @@
 package com.example.mobileordersystem.equipment
 
 import android.content.Context
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.mobileordersystem.R
 import kotlinx.android.synthetic.main.equipment_item.view.*
 
-class EquipmentAdapter(val items : MutableList<Equipment>, val context: Context) : RecyclerView.Adapter<ViewHolder>() {
+class EquipmentAdapter(val items : MutableList<Equipment>, val context: Context) : androidx.recyclerview.widget.RecyclerView.Adapter<ViewHolder>() {
 
 
     // Gets the number of animals in the list
@@ -29,7 +29,7 @@ class EquipmentAdapter(val items : MutableList<Equipment>, val context: Context)
     }
 }
 
-class ViewHolder (view: View) : RecyclerView.ViewHolder(view) {
+class ViewHolder (view: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(view) {
     // Holds the TextView that will add each animal to
     val name = view.name
     val amount = view.amount

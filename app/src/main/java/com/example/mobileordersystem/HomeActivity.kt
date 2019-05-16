@@ -2,15 +2,15 @@ package com.example.mobileordersystem
 
 import android.content.Intent
 import android.net.Uri
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.support.design.widget.BottomNavigationView
-import android.support.design.widget.NavigationView
-import android.support.v4.app.Fragment
-import android.support.v4.view.GravityCompat
-import android.support.v7.app.ActionBarDrawerToggle
-import android.support.v7.app.AlertDialog
-import android.support.v7.widget.RecyclerView
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.navigation.NavigationView
+import androidx.fragment.app.Fragment
+import androidx.core.view.GravityCompat
+import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AlertDialog
+import androidx.recyclerview.widget.RecyclerView
 import android.util.Log
 import android.view.View
 import android.widget.Toast
@@ -31,7 +31,7 @@ class HomeActivity : AppCompatActivity() {
     val TAG = "HomeActivity"
 
     var currentid = 0
-    val fragments = ArrayList<Fragment>()
+    val fragments = ArrayList<androidx.fragment.app.Fragment>()
     val fragmentStack = ArrayList<Int>()
     lateinit var displayName : String
     lateinit var userEmail : String
@@ -142,7 +142,7 @@ class HomeActivity : AppCompatActivity() {
         currentid = id
     }
 
-    private fun doReplaceTransaction(toReplace : Fragment, replacement : Fragment) {
+    private fun doReplaceTransaction(toReplace : androidx.fragment.app.Fragment, replacement : androidx.fragment.app.Fragment) {
         val transaction = supportFragmentManager.beginTransaction()
 //        transaction.replace(R.id.container, fragment)
 //        transaction.addToBackStack(null)

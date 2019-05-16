@@ -3,7 +3,7 @@ package com.example.mobileordersystem.equipment
 import android.content.Context
 import android.os.AsyncTask
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -15,7 +15,7 @@ import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.fragment_equipment.*
 import kotlinx.android.synthetic.main.fragment_equipment.view.*
 
-class EquipmentFragment: Fragment() {
+class EquipmentFragment: androidx.fragment.app.Fragment() {
 
     val TAG = "EquipmentFragment"
     lateinit var myAdapter: EquipmentAdapter

@@ -1,112 +1,127 @@
-<?xml version="1.0" encoding="utf-8"?><!--<android.support.v7.widget.Toolbar--><!--android:id="@+id/toolbar"--><!--xmlns:android="http://schemas.android.com/apk/res/android"--><!--android:layout_width="match_parent"--><!--android:layout_height="50dp"--><!--android:orientation="vertical"--><!--android:background="@color/colorAccent">-->
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
 
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="false">
+    android:fillViewport="false"
+    tools:context=".authorization.SignInActivity">
 
     <RelativeLayout
+        android:id="@+id/relativeRoot"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <android.support.v7.widget.Toolbar
+        <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             style="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="?attr/colorAccent"
-            android:minHeight="?attr/actionBarSize">
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/signIn"
-                android:textSize="18sp"
                 android:textAllCaps="true"
-                android:textColor="@color/white"/>
-        </android.support.v7.widget.Toolbar>
+                android:textSize="18sp" />
+
+        </androidx.appcompat.widget.Toolbar>
 
         <ProgressBar
             android:id="@+id/progressBar"
-            android:layout_below="@id/toolbar"
             style="@style/Widget.AppCompat.ProgressBar.Horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@id/toolbar"
             android:layout_gravity="center"
             android:layout_marginTop="-6dp"
             android:indeterminate="true"
-            android:visibility="invisible"
-            />
+            android:visibility="invisible" />
 
         <LinearLayout
-            android:layout_below="@id/progressBar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_below="@id/progressBar"
             android:orientation="vertical"
             android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-           >
+            android:paddingRight="10dp">
 
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/email_hint_text"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_margin="10dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/emailInput"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/password_hint_text"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_margin="10dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/passwordInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="textPassword" />
+
+            </com.google.android.material.textfield.TextInputLayout>
 
             <Button
                 android:id="@+id/signIn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:onClick="singUp"
-                android:text="@string/signUp" />
-
-            <TextView
-                android:id="@+id/emailShow"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:layout_weight="0.5"
-                android:text="@string/email" />
-
-            <EditText
-                android:id="@+id/emailInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.15"
-                android:ems="10"
-                android:inputType="textEmailAddress" />
-
-            <TextView
-                android:id="@+id/passwordShow"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:layout_weight="0.5"
-                android:text="@string/prompt_password" />
-
-            <EditText
-                android:id="@+id/passwordInput"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.15"
-                android:ems="10"
-                android:inputType="textPassword" />
-
-            <TextView
-                android:id="@+id/forgotPassword"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:layout_gravity="left"
-                android:layout_weight="0.5"
-                android:text="@string/forgotPassword" />
-
-            <Button
-                android:id="@+id/signIN"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                android:layout_weight="0"
+                android:layout_gravity="center"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
                 android:backgroundTint="@color/colorPrimary"
                 android:onClick="signIn"
                 android:text="@string/signIn" />
 
+            <TextView
+                android:id="@+id/forgotPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginStart="20dp"
+                android:text="@string/forgotPassword"
+                android:textColor="?attr/colorAccent" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"
+                android:layout_margin="20dp"/>
+
+            <Button
+                android:id="@+id/signUp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:onClick="singUp"
+                android:text="@string/signUp" />
+
+
         </LinearLayout>
+
+
     </RelativeLayout>
 </ScrollView>
 

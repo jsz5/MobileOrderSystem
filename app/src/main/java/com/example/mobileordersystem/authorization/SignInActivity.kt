@@ -1,8 +1,9 @@
 package com.example.mobileordersystem.authorization
 
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.google.android.material.snackbar.Snackbar
 import android.view.View
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -30,31 +31,33 @@ class SignInActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         val user = FirebaseAuth.getInstance().currentUser
-        if (user!=null && user.isEmailVerified){
+        if (user != null && user.isEmailVerified) {
             alreadySigned(user.email.toString(), user.displayName.toString())
         }
 
 
     }
-    private fun alreadySigned(email: String, displayName:String) {
+
+    private fun alreadySigned(email: String, displayName: String) {
         val intent = Intent(this@SignInActivity, HomeActivity::class.java)
         intent.putExtra("user", email)
         intent.putExtra("displayName", displayName)
         startActivity(intent)
         finish()
     }
-    fun singUp(view: View){
+
+    fun singUp(view: View) {
         val intent = Intent(this@SignInActivity, SignUpActivity::class.java)
         startActivity(intent)
     }
 
     fun signIn(view: View) {
-        findViewById<ProgressBar>(R.id.progressBar).visibility=View.VISIBLE
         val email = emailInput.text.toString()
         val password = passwordInput.text.toString()
         if (!validateForm(email, password)) {
             return
         }
+        findViewById<ProgressBar>(R.id.progressBar).visibility = View.VISIBLE
         mAuth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful && mAuth.currentUser!!.isEmailVerified) {
@@ -62,7 +65,7 @@ class SignInActivity : AppCompatActivity() {
                 } else {
                     Log.e(TAG, "signIn: Fail!", task.exception)
                     Toast.makeText(applicationContext, "Authentication failed!", Toast.LENGTH_SHORT).show()
-                    findViewById<ProgressBar>(R.id.progressBar).visibility=View.GONE
+                    findViewById<ProgressBar>(R.id.progressBar).visibility = View.GONE
                 }
             }
     }
@@ -70,18 +73,21 @@ class SignInActivity : AppCompatActivity() {
     private fun validateForm(email: String, password: String): Boolean {
 
         if (TextUtils.isEmpty(email)) {
-            Toast.makeText(applicationContext, "Enter email address!", Toast.LENGTH_SHORT).show()
+//            Toast.makeText(applicationContext, "Enter email address!", Toast.LENGTH_SHORT).show()
+            Snackbar.make(signIn, "Enter email address!", Snackbar.LENGTH_LONG).show()
             return false
         }
 
         if (TextUtils.isEmpty(password)) {
-            Toast.makeText(applicationContext, "Enter password!", Toast.LENGTH_SHORT).show()
+//            Toast.makeText(applicationContext, "Enter password!", Toast.LENGTH_SHORT).show()
+            Snackbar.make(signIn, "Enter password!", Snackbar.LENGTH_LONG).show()
             return false
         }
 
         if (password.length < 6) {
-            Toast.makeText(applicationContext, "Password too short, enter minimum 6 characters!", Toast.LENGTH_SHORT)
-                .show()
+//            Toast.makeText(applicationContext, "Password too short, enter minimum 6 characters!", Toast.LENGTH_SHORT)
+//                .show()
+            Snackbar.make(signIn, "Password too short, enter minimum 6 characters!", Snackbar.LENGTH_LONG).show()
             return false
         }
 

@@ -32,7 +32,7 @@
     <string name="passwordChangeSucces">Hasło zostało zmienione pomyślnie</string>
     <string name="passwordChangeFail">Nie udało się zmienić hasła</string>
     <string name="name">Imię i nazwisko</string>
-    <string name="forgotPassword">Zresetuj hasło</string>
+    <string name="forgotPassword">Nie pamiętasz hasła?</string>
     <string name="signIn">Zaloguj</string>
     <string name="signUp">Zarejestruj</string>
     <string name="checkEmailTitle">Sprawdź swoją skrzynkę pocztową! </string>
@@ -50,6 +50,7 @@
     <string name="enter_price">Wpisz cene/dzien tutaj</string>
     <string name="label_activeOrders">Aktywne zamówienia</string>
     <string name="label_recent_orders">Ostatnie zamówienia</string>
+    <string name="password_hint_text">Hasło</string>
 
 
 </resources>
