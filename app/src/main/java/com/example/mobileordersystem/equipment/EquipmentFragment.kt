@@ -45,6 +45,7 @@ class EquipmentFragment: androidx.fragment.app.Fragment() {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
                     equipmentList.clear()
                     dataSnapshot.children.mapNotNullTo(equipmentList) { it.getValue<Equipment>(Equipment::class.java) }
+                    Log.i("equipment", equipmentList[0].name.toString())
                     myAdapter?.notifyDataSetChanged()
                 }
                 override fun onCancelled(databaseError: DatabaseError) {

@@ -1,6 +1,7 @@
 package com.example.mobileordersystem.equipment
 
 import android.content.Context
+import android.util.Log
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -23,6 +24,7 @@ class EquipmentAdapter(val items : MutableList<Equipment>, val context: Context)
 
     // Binds each animal in the ArrayList to a view
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        Log.i("eq", items[position].name)
         holder.name.text = items[position].name
         holder.amount.text = items[position].amount.toString()
         holder.price.text = items[position].price.toString()

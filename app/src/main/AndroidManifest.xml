@@ -11,6 +11,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".authorization.ChangePasswordActivity" />
         <activity android:name=".authorization.SignUpActivity"></activity>
+        <activity android:name=".authorization.ForgotPasswordActivity"></activity>
         <activity android:name=".MainActivity" />
         <activity android:name=".HomeActivity" />
         <activity android:name=".authorization.SignInActivity">

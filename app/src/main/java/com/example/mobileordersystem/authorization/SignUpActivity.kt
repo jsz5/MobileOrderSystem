@@ -29,8 +29,8 @@ class SignUpActivity : AppCompatActivity() {
 
     fun signUp(view: View) {
 
-        email = emailInput.text.toString()
-        password = passwordInput.text.toString()
+        email = findViewById<EditText>(R.id.emailInput).text.toString()
+        password = findViewById<EditText>(R.id.passwordInput).text.toString()
         createAccount()
     }
 
@@ -54,8 +54,8 @@ class SignUpActivity : AppCompatActivity() {
             val user = FirebaseAuth.getInstance().currentUser
             if (user != null && user.isEmailVerified) {
                 val intent = Intent(this@SignUpActivity, HomeActivity::class.java)
-                intent.putExtra("user", email)
-                intent.putExtra("displayName", user.displayName)
+//                intent.putExtra("user", email)
+//                intent.putExtra("displayName", user.displayName)
                 startActivity(intent)
                 finish()
             }else if(!user!!.isEmailVerified){

@@ -1,5 +1,6 @@
 package com.example.mobileordersystem.authorization
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -15,6 +16,16 @@ import com.example.mobileordersystem.HomeActivity
 import com.example.mobileordersystem.R
 import kotlinx.android.synthetic.main.sign_in.*
 import kotlinx.android.synthetic.main.test.*
+import com.example.mobileordersystem.MainActivity
+import android.app.ProgressDialog
+import android.graphics.Paint
+import android.view.MotionEvent
+import android.view.View.OnTouchListener
+
+import android.widget.TextView
+
+
+
 
 class SignInActivity : AppCompatActivity() {
 
@@ -26,6 +37,7 @@ class SignInActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.sign_in)
         mAuth = FirebaseAuth.getInstance()
+        setForgotPassword();
     }
 
     override fun onStart() {
@@ -38,10 +50,20 @@ class SignInActivity : AppCompatActivity() {
 
     }
 
+    private fun setForgotPassword(){
+        val link=findViewById<TextView>(R.id.forgotPassword)
+        link.setOnClickListener {
+            link.paintFlags= Paint.UNDERLINE_TEXT_FLAG
+            val intent = Intent(this@SignInActivity, ForgotPasswordActivity::class.java)
+            startActivity(intent)
+            finish()
+
+        }
+    }
     private fun alreadySigned(email: String, displayName: String) {
         val intent = Intent(this@SignInActivity, HomeActivity::class.java)
-        intent.putExtra("user", email)
-        intent.putExtra("displayName", displayName)
+//        intent.putExtra("user", email)
+//        intent.putExtra("displayName", displayName)
         startActivity(intent)
         finish()
     }
