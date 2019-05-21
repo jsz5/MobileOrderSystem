@@ -32,7 +32,7 @@ class HomeActivity : AppCompatActivity() {
 
     var currentid = 0
     val fragments = ArrayList<androidx.fragment.app.Fragment>()
-    val fragmentStack = ArrayList<Int>()
+    var fragmentStack = ArrayList<Int>()
     lateinit var displayName : String
     lateinit var userEmail : String
 
@@ -109,6 +109,7 @@ class HomeActivity : AppCompatActivity() {
         (fragments[1] as EquipmentFragment).setAdapter(this)
         fragments.add(OrderFragment.newInstance())
         fragments.add(CustomerFragment.newInstance())
+        (fragments[3] as CustomerFragment).setAdapter(this)
 
         val transaction = supportFragmentManager.beginTransaction()
         for (fragment in fragments) {
@@ -142,13 +143,34 @@ class HomeActivity : AppCompatActivity() {
         currentid = id
     }
 
-    private fun doReplaceTransaction(toReplace : androidx.fragment.app.Fragment, replacement : androidx.fragment.app.Fragment) {
+    private fun doReplaceTransaction(toReplace : Fragment, replacement : Fragment) {
         val transaction = supportFragmentManager.beginTransaction()
 //        transaction.replace(R.id.container, fragment)
 //        transaction.addToBackStack(null)
         transaction.hide(toReplace)
         transaction.show(replacement)
         transaction.commit()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putIntegerArrayList("fragmentStack", fragmentStack)
+        outState.putInt("currentid", currentid)
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
+        super.onRestoreInstanceState(savedInstanceState)
+        if (savedInstanceState != null) {
+
+            currentid = savedInstanceState.getInt("currentid")
+
+            val navItem = nav_view.menu.getItem(currentid)
+            navItem.isChecked = true
+            bottomNavListener.onNavigationItemSelected(navItem)
+            fragmentStack = savedInstanceState.getIntegerArrayList("fragmentStack")
+
+        }
+
     }
 
 
@@ -210,10 +232,10 @@ class HomeActivity : AppCompatActivity() {
         val builder = AlertDialog.Builder(this@HomeActivity)
         builder.setTitle(R.string.delete_account)
         builder.setMessage(R.string.alertDelete)
-        builder.setPositiveButton("Tak"){dialog, which ->
+        builder.setPositiveButton("Tak"){ _, _ ->
            deleteAccount()
         }
-        builder.setNegativeButton("Nie"){dialog, which ->
+        builder.setNegativeButton("Nie"){ dialog, _ ->
             dialog.dismiss()
         }
         val dialog: AlertDialog = builder.create()

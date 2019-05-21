@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
         databaseReference = FirebaseDatabase.getInstance().reference
         myAdapter = EquipmentAdapter( equipmentList, this)
 //        equipmentListView.adapter = myAdapter
-//        getEquipmentList()
+//        getCustomerList()
 //        updateEquipment("LeYQzZVbncUvj8FdPtG", "update361", 76, 5f)
 
         //        createEquipment("głośnik", 32, 90.3f)
