@@ -5,7 +5,7 @@
     <string name="list">Lista</string>
     <string name="add">Dodaj</string>
     <string name="action_sign_in">Zaloguj lub zarejestruj</string>
-    <string name="action_sign_in_short">Zaloguj</string>
+    <string name="action_sign_in_short">Zalogu</string>
     <string name="invalid_password">Hasło musi zawierać >5 znaków</string>
     <string name="invalid_username">Niepoprawna nazwa użytkownika</string>
     <string name="login_failed">Logowanie nie powiodło się</string>
@@ -33,8 +33,8 @@
     <string name="passwordChangeFail">Nie udało się zmienić hasła</string>
     <string name="name">Imię i nazwisko</string>
     <string name="forgotPassword">Nie pamiętasz hasła?</string>
-    <string name="signIn">Zaloguj</string>
-    <string name="signUp">Zarejestruj</string>
+    <string name="signIn">Zaloguj się</string>
+    <string name="signUp">Zarejestruj się</string>
     <string name="checkEmailTitle">Sprawdź swoją skrzynkę pocztową! </string>
     <string name="checkEmail">Email weryfikacyjny został wysłany na adres</string>
     <string name="continueSignUp">Kontunuuj </string>
@@ -51,6 +51,7 @@
     <string name="label_activeOrders">Aktywne zamówienia</string>
     <string name="label_recent_orders">Ostatnie zamówienia</string>
     <string name="password_hint_text">Hasło</string>
+    <string name="dont_have_account">Nie masz jeszcze konta?</string>
 
     <string name="add_equipment_success">Sprzęt został dodany!</string>
     <string name="add_equipment_failure">Wystąpił błąd!</string>

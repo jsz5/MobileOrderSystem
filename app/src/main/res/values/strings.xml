@@ -55,6 +55,7 @@
     <string name="label_recent_orders">Recent Orders</string>
     <string name="email_hint_text" translatable="false">E-mail</string>
     <string name="password_hint_text">Password</string>
+    <string name="dont_have_account">Don\'t have an account yet?</string>
 
     <string name="add_equipment_success">Equipment has been added!</string>
     <string name="add_equipment_failure">Error occurred!</string>
