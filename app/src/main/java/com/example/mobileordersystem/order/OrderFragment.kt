@@ -5,7 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.mobileordersystem.HomeActivity
 import com.example.mobileordersystem.R
+import kotlinx.android.synthetic.main.fragment_equipment.*
+import kotlinx.android.synthetic.main.fragment_order.*
 
 class OrderFragment : androidx.fragment.app.Fragment() {
 
@@ -14,5 +17,11 @@ class OrderFragment : androidx.fragment.app.Fragment() {
 
     companion object {
         fun newInstance(): OrderFragment = OrderFragment()
+    }
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        addOrder.setOnClickListener {
+            (activity as HomeActivity).openFragment(5, true)
+        }
     }
 }

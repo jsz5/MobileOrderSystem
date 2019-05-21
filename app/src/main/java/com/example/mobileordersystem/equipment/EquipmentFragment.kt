@@ -3,13 +3,11 @@ package com.example.mobileordersystem.equipment
 import android.content.Context
 import android.os.AsyncTask
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.mobileordersystem.HomeActivity
-import com.example.mobileordersystem.MainActivity
 import com.example.mobileordersystem.R
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.fragment_equipment.*
@@ -28,9 +26,14 @@ class EquipmentFragment: androidx.fragment.app.Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_equipment, container, false)
-
     }
 
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        addEquipment.setOnClickListener {
+            (activity as HomeActivity).openFragment(4, true)
+        }
+    }
     fun setAdapter(context : Context){
 
         myAdapter = EquipmentAdapter(equipmentList, context)
@@ -56,12 +59,5 @@ class EquipmentFragment: androidx.fragment.app.Fragment() {
         }
     }
 
-    private fun createEquipment(name: String, amount: Int, price: Float) {
-        AsyncTask.execute {
-            val equipmentReference = FirebaseDatabase.getInstance().getReference("Equipment")
-            val id = equipmentReference.push().key as String
-            val equipment = Equipment(id, name, amount, price)
-            equipmentReference.child(id).setValue(equipment);
-        }
-    }
+
 }

@@ -18,7 +18,9 @@ import com.example.mobileordersystem.authorization.ChangePasswordActivity
 import com.example.mobileordersystem.authorization.LoginActivity
 import com.example.mobileordersystem.authorization.SignInActivity
 import com.example.mobileordersystem.customer.CustomerFragment
+import com.example.mobileordersystem.equipment.CreateEquipmentFragment
 import com.example.mobileordersystem.equipment.EquipmentFragment
+import com.example.mobileordersystem.order.CreateOrderFragment
 import com.example.mobileordersystem.order.OrderFragment
 import com.firebase.ui.auth.AuthUI
 import com.google.firebase.auth.FirebaseAuth
@@ -109,6 +111,8 @@ class HomeActivity : AppCompatActivity() {
         (fragments[1] as EquipmentFragment).setAdapter(this)
         fragments.add(OrderFragment.newInstance())
         fragments.add(CustomerFragment.newInstance())
+        fragments.add(CreateEquipmentFragment.newInstance())
+        fragments.add(CreateOrderFragment.newInstance())
 
         val transaction = supportFragmentManager.beginTransaction()
         for (fragment in fragments) {
@@ -124,7 +128,7 @@ class HomeActivity : AppCompatActivity() {
 
     }
 
-    private fun openFragment(id: Int, addToStack : Boolean) {
+    public fun openFragment(id: Int, addToStack : Boolean) {
 
         if(addToStack) {
             if(fragmentStack.contains(currentid)) {

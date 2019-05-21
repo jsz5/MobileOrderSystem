@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="false">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextView
+            android:id="@+id/nameShow"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_weight="0.5"
+            android:text="@string/order_name" />
+
+        <EditText
+            android:id="@+id/nameInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.15"
+            android:ems="10"
+            android:inputType="text" />
+
+        <TextView
+            android:id="@+id/itemsShow"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_weight="0"
+            android:text="@string/items" />
+
+        <Spinner
+            android:id="@+id/itemsInput"
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:layout_weight="0.05" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floatingActionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="0dp"
+            app:backgroundTint="@color/colorPrimary"
+            app:layout_constraintBottom_toBottomOf="@+id/customerShow"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_gravity="right"
+            app:srcCompat="@drawable/add" />
+
+
+        <TextView
+            android:id="@+id/customerShow"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_weight="0.10"
+            android:paddingTop="2dp"
+            android:text="@string/customer" />
+
+        <Spinner
+            android:id="@+id/customerInput"
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:layout_weight="0.05" />
+
+        <TextView
+            android:id="@+id/rentalDateShow"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_weight="0.10"
+            android:paddingTop="2dp"
+            android:text="@string/rental_date" />
+
+        <Button
+            android:id="@+id/rentalDateInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:backgroundTint="@color/colorPrimary"
+            android:onClick="showDatePickerDialog" />
+
+        <TextView
+            android:id="@+id/renturnDateShow"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_weight="0.10"
+            android:paddingTop="2dp"
+            android:text="@string/return_date" />
+
+        <Button
+            android:id="@+id/returnDateInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:backgroundTint="@color/colorPrimary"
+            android:onClick="showDatePickerDialog" />
+
+        <TextView
+            android:id="@+id/discountShow"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_weight="0.05"
+            android:paddingTop="2dp"
+            android:text="@string/discount" />
+
+        <EditText
+            android:id="@+id/discountInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.15"
+            android:ems="10"
+            android:hint="0"
+            android:inputType="text" />
+
+        <TextView
+            android:id="@+id/sumPriceShow"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_weight="0.05"
+            android:paddingTop="2dp"
+            android:text="@string/sum_price" />
+
+        <EditText
+            android:id="@+id/sumPriceInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.15"
+            android:ems="10"
+            android:hint="0"
+            android:inputType="text" />
+
+        <Button
+            android:id="@+id/save"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_weight="0"
+            android:backgroundTint="@color/colorPrimary"
+            android:onClick="saveTask"
+            android:text="@string/save" />
+
+    </LinearLayout>
+</ScrollView>
+
+

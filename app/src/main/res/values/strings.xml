@@ -56,5 +56,13 @@
     <string name="email_hint_text" translatable="false">E-mail</string>
     <string name="password_hint_text">Password</string>
 
-
+    <string name="add_equipment_success">Equipment has been added!</string>
+    <string name="add_equipment_failure">Error occurred!</string>
+    <string name="order_name">Order name</string>
+    <string name="items">Items</string>
+    <string name="customer">Customer</string>
+    <string name="rental_date">Rental date</string>
+    <string name="return_date">Return date</string>
+    <string name="discount">Discount</string>
+    <string name="sum_price">Order price</string>
 </resources>

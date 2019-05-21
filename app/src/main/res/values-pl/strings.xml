@@ -44,7 +44,7 @@
     <string name="add_button">Dodaj</string>
     <string name="item_name">Nazwa przedmiotu</string>
     <string name="amount">Ilość</string>
-    <string name="price_day">Cena/dzień</string>
+    <string name="price_day">Cena / dzień</string>
     <string name="enter_name">Wpisz nazwe tutaj</string>
     <string name="enter_amount">Wpisz ilość tutaj</string>
     <string name="enter_price">Wpisz cene/dzien tutaj</string>
@@ -52,5 +52,14 @@
     <string name="label_recent_orders">Ostatnie zamówienia</string>
     <string name="password_hint_text">Hasło</string>
 
+    <string name="add_equipment_success">Sprzęt został dodany!</string>
+    <string name="add_equipment_failure">Wystąpił błąd!</string>
 
+    <string name="order_name">Nazwa zamówienia</string>
+    <string name="items">Sprzęt</string>
+    <string name="customer">Klient</string>
+    <string name="rental_date">Data wypożyczenia</string>
+    <string name="return_date">Data zwrotu</string>
+    <string name="discount">Rabat</string>
+    <string name="sum_price">Cena zamówienia</string>
 </resources>
