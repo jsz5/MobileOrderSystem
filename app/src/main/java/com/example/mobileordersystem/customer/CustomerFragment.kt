@@ -33,16 +33,14 @@ class CustomerFragment : androidx.fragment.app.Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        customersContainer.layoutManager = LinearLayoutManager(activity)
+
+        val mContext = context as Context
+        myAdapter = CustomerAdapter(customerList,mContext)
+        getCustomerList()
+        customersContainer.layoutManager = LinearLayoutManager(context)
         customersContainer.adapter = myAdapter
         customersContainer.itemAnimator = DefaultItemAnimator()
 
-    }
-
-    fun setAdapter(context : Context){
-        myAdapter = CustomerAdapter(customerList, context)
-        getCustomerList()
-        Log.i(TAG, "set up")
     }
 
 

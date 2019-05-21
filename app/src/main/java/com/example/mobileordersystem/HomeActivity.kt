@@ -106,10 +106,8 @@ class HomeActivity : AppCompatActivity() {
 
         fragments.add(HomeFragment.newInstance())
         fragments.add(EquipmentFragment.newInstance())
-        (fragments[1] as EquipmentFragment).setAdapter(this)
         fragments.add(OrderFragment.newInstance())
         fragments.add(CustomerFragment.newInstance())
-        (fragments[3] as CustomerFragment).setAdapter(this)
 
         val transaction = supportFragmentManager.beginTransaction()
         for (fragment in fragments) {
@@ -149,6 +147,22 @@ class HomeActivity : AppCompatActivity() {
 //        transaction.addToBackStack(null)
         transaction.hide(toReplace)
         transaction.show(replacement)
+        transaction.commit()
+    }
+
+    private fun hideAllFragments(){
+        val transaction = supportFragmentManager.beginTransaction()
+        for(fragment in fragments) {
+            transaction.hide(fragment)
+        }
+        transaction.commit()
+    }
+
+    private fun showFragment(){
+        val transaction = supportFragmentManager.beginTransaction()
+        for(fragment in fragments) {
+            transaction.hide(fragment)
+        }
         transaction.commit()
     }
 
