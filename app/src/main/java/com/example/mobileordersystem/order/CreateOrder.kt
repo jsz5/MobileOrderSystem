@@ -4,8 +4,6 @@ import android.content.Intent
 import android.os.AsyncTask
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.ArrayAdapter
-import android.widget.Spinner
 import com.example.mobileordersystem.R
 import com.example.mobileordersystem.customer.CreateCustomer
 import com.example.mobileordersystem.customer.Customer
@@ -13,18 +11,12 @@ import com.example.mobileordersystem.equipment.Equipment
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.fragment_create_order.*
 
-import android.widget.LinearLayout
-
 import android.view.View
-import android.widget.TextView
-
-
-
+import android.widget.*
 
 
 class CreateOrder : AppCompatActivity() {
     private val customerList: MutableList<Customer> = mutableListOf()
-    private val equipmentList: MutableList<Equipment> = mutableListOf()
     private lateinit var databaseReference: DatabaseReference
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,8 +28,14 @@ class CreateOrder : AppCompatActivity() {
         databaseReference = FirebaseDatabase.getInstance().reference
         setDatePickers()
         setCustomerSpinner()
-        setEquipmentSpinner()
-        setAddEquipment()
+        addEquipment.setOnClickListener {
+
+            val layout = newSpinner as LinearLayout
+            val addSpinner=findViewById<Spinner>(R.id.equipmentInput)
+            val newSpinner=Spinner(this)
+            layout.addView(Spinner(this))
+
+        }
 
 
     }
@@ -81,45 +79,9 @@ class CreateOrder : AppCompatActivity() {
         }
     }
 
-    private fun setEquipmentSpinner() {
-        AsyncTask.execute {
-            val equipmentListener = object : ValueEventListener {
-                override fun onDataChange(dataSnapshot: DataSnapshot) {
-                    equipmentList.clear()
-                    dataSnapshot.children.mapNotNullTo(equipmentList) { it.getValue<Equipment>(Equipment::class.java) }
-                    val spinner: Spinner = equipmentInput
-                    val spinnerArrayAdapter =
-                        ArrayAdapter<Equipment>(this@CreateOrder, android.R.layout.simple_spinner_item, equipmentList)
 
-                    spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                    spinner.adapter = spinnerArrayAdapter
-                    spinnerArrayAdapter.notifyDataSetChanged()
-                }
 
-                override fun onCancelled(databaseError: DatabaseError) {
-                    println("loadPost:onCancelled ${databaseError.toException()}")
-                }
-            }
-            databaseReference.child("Equipment").addListenerForSingleValueEvent(equipmentListener)
 
-        }
-    }
-
-    private fun setAddEquipment() {
-        addEquipment.setOnClickListener {
-//            val layout = findViewById<View>(R.id.newSpinner) as LinearLayout
-//
-//            val child = layoutInflater.inflate(R.layout., null)
-//            layout.addView(child)
-//
-//
-//
-//            val txt1 = TextView(this@MyClass)
-//            linearLayout.setBackgroundColor(Color.TRANSPARENT)
-//            linearLayout.addView(txt1)
-
-        }
-    }
 
 }
 

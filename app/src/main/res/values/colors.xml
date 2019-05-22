@@ -6,6 +6,6 @@
     <color name="colorSecondary">#EF9A9A</color>
     <color name="colorAccentLight">#FF8A80</color>
 
-    <color name="gray">#bfbfbf</color>
-    <color name="white">#fff</color>
+    <!--<color name="gray">#bfbfbf</color>-->
+    <!--<color name="white">#fff</color>-->
 </resources>

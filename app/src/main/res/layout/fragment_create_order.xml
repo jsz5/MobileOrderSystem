@@ -38,25 +38,19 @@
             android:layout_height="wrap_content"
             android:id="@+id/newSpinner">
 
-            <RelativeLayout
-                android:id="@+id/plusEquipment"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+            <Spinner
+                android:id="@+id/equipmentInput"
+                android:layout_width="fill_parent"
+                android:layout_height="40dp" />
 
-                <Spinner
-                    android:id="@+id/equipmentInput"
-                    android:layout_width="fill_parent"
-                    android:layout_height="40dp" />
-
-                <Button
-                    android:id="@+id/addEquipment"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/equipmentInput"
-                    android:backgroundTint="@color/colorPrimary"
-                    android:text="@string/add" />
-            </RelativeLayout>
         </LinearLayout>
+        <Button
+            android:id="@+id/addEquipment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/equipmentInput"
+            android:backgroundTint="@color/colorPrimary"
+            android:text="@string/add" />
 
 
         <TextView

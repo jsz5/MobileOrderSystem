@@ -28,8 +28,7 @@
             android:layout_height="wrap_content"
             android:text="@string/signUp"
             android:textSize="18sp"
-            android:textAllCaps="true"
-            android:textColor="@color/white"/>
+            android:textAllCaps="true"/>
     </androidx.appcompat.widget.Toolbar>
 
     <ProgressBar

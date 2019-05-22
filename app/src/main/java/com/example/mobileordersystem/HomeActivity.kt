@@ -12,6 +12,7 @@ import androidx.appcompat.app.AlertDialog
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatDelegate
 import com.example.mobileordersystem.authorization.ChangePasswordActivity
 import com.example.mobileordersystem.authorization.SignInActivity
 import com.example.mobileordersystem.customer.CreateCustomerFragment
@@ -71,6 +72,7 @@ class HomeActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
