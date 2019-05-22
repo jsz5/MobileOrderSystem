@@ -1,6 +1,7 @@
 package com.example.mobileordersystem.equipment
 
 import android.content.Context
+import android.content.Intent
 import android.os.AsyncTask
 import android.os.Bundle
 import android.util.Log
@@ -9,11 +10,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.mobileordersystem.HomeActivity
 import com.example.mobileordersystem.R
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.fragment_equipment.*
-import kotlinx.android.synthetic.main.fragment_equipment.view.*
 
 class EquipmentFragment: androidx.fragment.app.Fragment() {
 
@@ -36,7 +35,8 @@ class EquipmentFragment: androidx.fragment.app.Fragment() {
         eqContainer.adapter = myAdapter
         eqContainer.itemAnimator = DefaultItemAnimator()
         addEquipment.setOnClickListener {
-            (activity as HomeActivity).openFragment(4, true)
+            val intent = Intent(activity, CreateEquipment::class.java)
+            startActivity(intent)
         }
 
     }

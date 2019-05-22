@@ -1,10 +1,13 @@
 package com.example.mobileordersystem.customer
 
 import com.google.firebase.database.Exclude
+import android.R.attr.name
+
+
 
 class Customer(
     var customerId: String,
-    var orderId: String?=null,
+    var orderId: ArrayList<String>?=null,
     var name: String,
     var surname: String,
     var companyName: String,
@@ -13,7 +16,7 @@ class Customer(
     var address: String,
     var telephone: Int
 ) {
-    constructor() : this(""," ","", "","",0,"","",0)
+    constructor() : this("", arrayListOf(),"", "","",0,"","",0)
     @Exclude
     fun toMap(): Map<String, Any?> {
         return mapOf(
@@ -26,6 +29,9 @@ class Customer(
             "surname" to surname,
             "telephone" to telephone
         )
+    }
+    override fun toString(): String {
+        return name+" "+surname
     }
 
 }

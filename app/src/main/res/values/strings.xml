@@ -66,4 +66,12 @@
     <string name="return_date">Return date</string>
     <string name="discount">Discount</string>
     <string name="sum_price">Order price</string>
+
+    <string name="customer_name">Name</string>
+    <string name="customer_surname">Surname</string>
+    <string name="customer_company">Company name</string>
+    <string name="customer_nip">NIP number</string>
+    <string name="customer_email">Email</string>
+    <string name="customer_address">Address</string>
+    <string name="customer_telephone">Telephone</string>
 </resources>

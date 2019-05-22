@@ -9,6 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".customer.CreateCustomer"></activity>
+        <activity android:name=".order.CreateOrder"></activity>
+        <activity android:name=".equipment.CreateEquipment"></activity>
         <activity android:name=".authorization.ChangePasswordActivity" />
         <activity android:name=".authorization.SignUpActivity"></activity>
         <activity android:name=".authorization.ForgotPasswordActivity"></activity>

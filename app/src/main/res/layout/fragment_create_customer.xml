@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="false">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:orientation="vertical"
+        android:padding="20dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="30dp" android:id="@+id/nameShow" android:layout_weight="0.5"
+            android:text="@string/customer_name"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:ems="10"
+            android:id="@+id/nameInput" android:layout_weight="0.15"
+            />
+        <TextView
+            android:text="@string/customer_surname"
+            android:layout_width="match_parent"
+            android:layout_height="30dp" android:id="@+id/surnameShow" android:layout_weight="0"
+            />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:ems="10"
+            android:id="@+id/surnameInput" android:layout_weight="0.25"/>
+        <TextView
+            android:text="@string/customer_company"
+            android:layout_width="match_parent"
+            android:layout_height="30dp" android:id="@+id/companyShow" android:layout_weight="0.10"
+            android:paddingTop="2dp"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:ems="10"
+            android:id="@+id/companyInput" android:layout_weight="0.25"/>
+        <TextView
+            android:text="@string/customer_nip"
+            android:layout_width="match_parent"
+            android:layout_height="30dp" android:id="@+id/nipShow" android:layout_weight="0.10"
+            android:paddingTop="2dp"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:ems="10"
+            android:id="@+id/nipInput" android:layout_weight="0.25"/>
+        <TextView
+            android:text="@string/customer_email"
+            android:layout_width="match_parent"
+            android:layout_height="30dp" android:id="@+id/emailShow" android:layout_weight="0.10"
+            android:paddingTop="2dp"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            android:ems="10"
+            android:id="@+id/emailInput" android:layout_weight="0.25"/>
+        <TextView
+            android:text="@string/customer_address"
+            android:layout_width="match_parent"
+            android:layout_height="30dp" android:id="@+id/addressShow" android:layout_weight="0.10"
+            android:paddingTop="2dp"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:ems="10"
+            android:id="@+id/addressInput" android:layout_weight="0.25"/>
+        <TextView
+            android:text="@string/customer_telephone"
+            android:layout_width="match_parent"
+            android:layout_height="30dp" android:id="@+id/telephoneShow" android:layout_weight="0.10"
+            android:paddingTop="2dp"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:ems="10"
+            android:id="@+id/telephoneInput" android:layout_weight="0.25"/>
+
+        <Button
+            android:text="@string/save"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:id="@+id/save" android:layout_weight="0"
+            android:layout_marginBottom="5dp" android:layout_marginTop="5dp"
+            android:backgroundTint="@color/colorPrimary"/>
+
+    </LinearLayout>
+</ScrollView>
+
+

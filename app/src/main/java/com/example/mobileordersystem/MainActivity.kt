@@ -56,17 +56,17 @@ class MainActivity : AppCompatActivity() {
 //        }
 //    }
 
-    private fun createCustomer(
-        orderId: String? = null, name: String, surname: String, companyName: String,
-        NIP: Int, email: String, address: String, telephone: Int
-    ) {
-        AsyncTask.execute {
-            val customerReference = FirebaseDatabase.getInstance().getReference("Customer")
-            val id = customerReference.push().key as String
-            val customer = Customer(id, orderId, name, surname, companyName, NIP, email, address, telephone)
-            customerReference.child(id).setValue(customer);
-        }
-    }
+//    private fun createCustomer(
+//        orderId: String? = null, name: String, surname: String, companyName: String,
+//        NIP: Int, email: String, address: String, telephone: Int
+//    ) {
+//        AsyncTask.execute {
+//            val customerReference = FirebaseDatabase.getInstance().getReference("Customer")
+//            val id = customerReference.push().key as String
+//            val customer = Customer(id, orderId, name, surname, companyName, NIP, email, address, telephone)
+//            customerReference.child(id).setValue(customer);
+//        }
+//    }
 
     private fun createOrder(
         equipmentsId: ArrayList<String>, customerId: String, name: String, rentalData: String,
@@ -101,7 +101,7 @@ class MainActivity : AppCompatActivity() {
         AsyncTask.execute {
             val key = databaseReference.child("Equipment").push().key
             if (key != null) {
-                val equipment = Equipment(equipmentID, name, amount, price)
+                val equipment = Equipment(equipmentID, name, amount,amount, price)
                 val postValues = equipment.toMap()
                 val childUpdates = HashMap<String, Any>()
                 childUpdates["/Equipment/$equipmentID"] = postValues

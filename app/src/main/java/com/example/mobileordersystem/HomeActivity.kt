@@ -1,7 +1,6 @@
 package com.example.mobileordersystem
 
 import android.content.Intent
-import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -10,17 +9,14 @@ import androidx.fragment.app.Fragment
 import androidx.core.view.GravityCompat
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
-import androidx.recyclerview.widget.RecyclerView
 import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.example.mobileordersystem.authorization.ChangePasswordActivity
-import com.example.mobileordersystem.authorization.LoginActivity
 import com.example.mobileordersystem.authorization.SignInActivity
+import com.example.mobileordersystem.customer.CreateCustomerFragment
 import com.example.mobileordersystem.customer.CustomerFragment
-import com.example.mobileordersystem.equipment.CreateEquipmentFragment
 import com.example.mobileordersystem.equipment.EquipmentFragment
-import com.example.mobileordersystem.order.CreateOrderFragment
 import com.example.mobileordersystem.order.OrderFragment
 import com.firebase.ui.auth.AuthUI
 import com.google.firebase.auth.FirebaseAuth
@@ -111,8 +107,6 @@ class HomeActivity : AppCompatActivity() {
         (fragments[1] as EquipmentFragment).setAdapter(this)
         fragments.add(OrderFragment.newInstance())
         fragments.add(CustomerFragment.newInstance())
-        fragments.add(CreateEquipmentFragment.newInstance())
-        fragments.add(CreateOrderFragment.newInstance())
         (fragments[3] as CustomerFragment).setAdapter(this)
 
         val transaction = supportFragmentManager.beginTransaction()
