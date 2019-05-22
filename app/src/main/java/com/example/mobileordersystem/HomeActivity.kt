@@ -12,6 +12,7 @@ import androidx.appcompat.app.AlertDialog
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatDelegate
 import com.example.mobileordersystem.authorization.ChangePasswordActivity
 import com.example.mobileordersystem.authorization.SignInActivity
 import com.example.mobileordersystem.customer.CreateCustomerFragment
@@ -71,6 +72,9 @@ class HomeActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
+
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
@@ -107,17 +111,18 @@ class HomeActivity : AppCompatActivity() {
         fragments.add(OrderFragment.newInstance())
         fragments.add(CustomerFragment.newInstance())
 
-        val transaction = supportFragmentManager.beginTransaction()
-        for (fragment in fragments) {
-            transaction.add(R.id.container, fragment)
-            transaction.hide(fragment)
-        }
-        transaction.commit()
+//        val transaction = supportFragmentManager.beginTransaction()
+//        for (fragment in fragments) {
+//            transaction.add(R.id.container, fragment)
+//            transaction.hide(fragment)
+//        }
+//        transaction.commit()
 
         navView.setOnNavigationItemSelectedListener(bottomNavListener)
         val homeItem = navView.menu.getItem(0)
         homeItem.isChecked = true
-        bottomNavListener.onNavigationItemSelected(homeItem)
+        showFragment(fragments[0])
+//        bottomNavListener.onNavigationItemSelected(homeItem)
 
     }
 
@@ -141,10 +146,10 @@ class HomeActivity : AppCompatActivity() {
 
     private fun doReplaceTransaction(toReplace : Fragment, replacement : Fragment) {
         val transaction = supportFragmentManager.beginTransaction()
-//        transaction.replace(R.id.container, fragment)
+        transaction.replace(R.id.container, replacement)
 //        transaction.addToBackStack(null)
-        transaction.hide(toReplace)
-        transaction.show(replacement)
+//        transaction.hide(toReplace)
+//        transaction.show(replacement)
         transaction.commit()
     }
 
@@ -156,12 +161,24 @@ class HomeActivity : AppCompatActivity() {
         transaction.commit()
     }
 
-    private fun showFragment(){
+    private fun showFragment(fragment: Fragment){
         val transaction = supportFragmentManager.beginTransaction()
-        for(fragment in fragments) {
-            transaction.hide(fragment)
-        }
+        transaction.replace(R.id.container, fragment)
         transaction.commit()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putInt("currentid", currentid)
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
+        super.onRestoreInstanceState(savedInstanceState)
+        Log.i(TAG, currentid.toString())
+        if (savedInstanceState != null) {
+            currentid = savedInstanceState.getInt("currentid")
+        }
+        showFragment(fragments[currentid])
     }
 
 

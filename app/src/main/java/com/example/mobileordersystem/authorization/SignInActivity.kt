@@ -23,8 +23,7 @@ import android.view.MotionEvent
 import android.view.View.OnTouchListener
 
 import android.widget.TextView
-
-
+import androidx.appcompat.app.AppCompatDelegate
 
 
 class SignInActivity : AppCompatActivity() {
@@ -34,6 +33,7 @@ class SignInActivity : AppCompatActivity() {
     private lateinit var mAuth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.sign_in)
         mAuth = FirebaseAuth.getInstance()
