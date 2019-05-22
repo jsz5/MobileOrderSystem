@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.mobileordersystem.R
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.fragment_equipment.*
@@ -44,9 +45,19 @@ class EquipmentFragment: androidx.fragment.app.Fragment() {
             startActivity(intent)
         }
 
+
+        eqContainer.addOnScrollListener(object : RecyclerView.OnScrollListener(){
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                if(dy > 0) {
+                    addEquipment.shrink(true)
+                } else {
+                    addEquipment.extend(true)
+                }
+            }
+        })
+
     }
-
-
 
     private fun getEquipmentList() {
         AsyncTask.execute {

@@ -74,4 +74,7 @@
     <string name="customer_email">Email</string>
     <string name="customer_address">Address</string>
     <string name="customer_telephone">Telephone</string>
+    <string name="add_eq_fab_label">Add equipment</string>
+    <string name="add_customer_fab_label">Add customer</string>
+    <string name="add_order_fab_label">Add order</string>
 </resources>

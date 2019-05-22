@@ -164,28 +164,10 @@ class HomeActivity : AppCompatActivity() {
         transaction.commit()
     }
 
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        outState.putIntegerArrayList("fragmentStack", fragmentStack)
-        outState.putInt("currentid", currentid)
+
+    fun openDrawer(){
+        drawer_layout.openDrawer(GravityCompat.START)
     }
-
-    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
-        super.onRestoreInstanceState(savedInstanceState)
-        if (savedInstanceState != null) {
-
-            currentid = savedInstanceState.getInt("currentid")
-
-            val navItem = nav_view.menu.getItem(currentid)
-            navItem.isChecked = true
-            bottomNavListener.onNavigationItemSelected(navItem)
-            fragmentStack = savedInstanceState.getIntegerArrayList("fragmentStack")
-
-        }
-
-    }
-
-
 
     override fun onBackPressed() {
         if(drawer_layout.isDrawerOpen(GravityCompat.START)) {

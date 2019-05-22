@@ -4,17 +4,21 @@ import android.content.Context
 import android.os.AsyncTask
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.GravityCompat
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.mobileordersystem.HomeActivity
 import com.example.mobileordersystem.R
-import com.example.mobileordersystem.equipment.Equipment
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.fragment_customer.*
 
 class CustomerFragment : androidx.fragment.app.Fragment() {
@@ -35,11 +39,24 @@ class CustomerFragment : androidx.fragment.app.Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val mContext = context as Context
-        myAdapter = CustomerAdapter(customerList,mContext)
+        myAdapter = CustomerAdapter(customerList, mContext)
         getCustomerList()
         customersContainer.layoutManager = LinearLayoutManager(context)
         customersContainer.adapter = myAdapter
         customersContainer.itemAnimator = DefaultItemAnimator()
+
+        customersContainer.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                if (dy > 0) {
+                    addCustomer.shrink(true)
+                } else {
+                    addCustomer.extend(true)
+                }
+            }
+        })
+
+        materialToolbar.setNavigationOnClickListener { (activity as HomeActivity).openDrawer() }
 
     }
 
@@ -53,6 +70,7 @@ class CustomerFragment : androidx.fragment.app.Fragment() {
                     Log.i("customer", customerList[0].name)
                     myAdapter.notifyDataSetChanged()
                 }
+
                 override fun onCancelled(databaseError: DatabaseError) {
                     println("loadPost:onCancelled ${databaseError.toException()}")
                 }
