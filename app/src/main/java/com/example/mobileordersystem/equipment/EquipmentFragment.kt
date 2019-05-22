@@ -31,7 +31,12 @@ class EquipmentFragment: androidx.fragment.app.Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        eqContainer.layoutManager = LinearLayoutManager(activity)
+
+        val mContext : Context = context as Context
+        myAdapter = EquipmentAdapter(equipmentList, mContext)
+        getEquipmentList()
+        Log.i(TAG, equipmentList.size.toString())
+        eqContainer.layoutManager = LinearLayoutManager(context)
         eqContainer.adapter = myAdapter
         eqContainer.itemAnimator = DefaultItemAnimator()
         addEquipment.setOnClickListener {
@@ -41,11 +46,6 @@ class EquipmentFragment: androidx.fragment.app.Fragment() {
 
     }
 
-    fun setAdapter(context : Context){
-        myAdapter = EquipmentAdapter(equipmentList, context)
-        getEquipmentList()
-        Log.i(TAG, "set up")
-    }
 
 
     private fun getEquipmentList() {
@@ -54,14 +54,14 @@ class EquipmentFragment: androidx.fragment.app.Fragment() {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
                     equipmentList.clear()
                     dataSnapshot.children.mapNotNullTo(equipmentList) { it.getValue<Equipment>(Equipment::class.java) }
-                    Log.i("equipment", equipmentList[0].name)
+                    Log.i(TAG, equipmentList.size.toString())
                     myAdapter.notifyDataSetChanged()
                 }
                 override fun onCancelled(databaseError: DatabaseError) {
                     println("loadPost:onCancelled ${databaseError.toException()}")
                 }
             }
-            databaseReference.child("Equipment").addListenerForSingleValueEvent(equipmentListener)
+            databaseReference.child("Equipment").addValueEventListener(equipmentListener)
         }
     }
 
