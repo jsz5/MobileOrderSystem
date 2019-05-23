@@ -74,4 +74,5 @@
     <string name="add_eq_fab_label">Dodaj sprzęt</string>
     <string name="add_customer_fab_label">Dodaj klienta</string>
     <string name="add_order_fab_label">Dodaj zamówienie</string>
+    <string name="night_mode_switch_label">Ciemny motyw</string>
 </resources>

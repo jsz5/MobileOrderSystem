@@ -2,34 +2,35 @@
 <com.google.android.material.circularreveal.coordinatorlayout.CircularRevealCoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/customerCoordinator"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
     tools:context=".HomeActivity">
 
 
-        <com.google.android.material.appbar.AppBarLayout
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:liftOnScroll="true">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/materialToolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:liftOnScroll="true">
+            android:layout_height="match_parent"
+            app:navigationIcon="@drawable/ic_side_menu"
+            app:title="Customers" />
 
-            <com.google.android.material.appbar.MaterialToolbar
-                android:id="@+id/materialToolbar"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:navigationIcon="@drawable/ic_side_menu"
-                app:title="Customers" />
-
-        </com.google.android.material.appbar.AppBarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
 
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/customersContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scrollbars="vertical"
         android:fadeScrollbars="true"
-        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"/>
+        android:scrollbars="vertical"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior" />
 
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
