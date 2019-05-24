@@ -1,67 +1,50 @@
 package com.example.mobileordersystem.customer
 
 
+import android.app.Activity
+import android.content.Intent
 import android.graphics.Color
 import android.os.AsyncTask
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import com.example.mobileordersystem.AbstractDataUpdate
 import com.example.mobileordersystem.R
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.fragment_create_customer.*
 import kotlinx.android.synthetic.main.fragment_create_order.nameInput
 import kotlinx.android.synthetic.main.fragment_create_order.save
+import java.lang.Exception
 
-class CreateCustomer : AppCompatActivity()  {
+class CreateCustomer : AbstractDataUpdate() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.fragment_create_customer)
         save.setOnClickListener {
             try {
-                val name = nameInput.text.toString()
-                val surname = surnameInput.text.toString()
-                val companyName = companyInput.text.toString()
-                val nip = nipInput.text.toString().toInt()
-                val email = emailInput.text.toString()
-                val address = addressInput.text.toString()
-                val telephone = telephoneInput.text.toString().toInt()
-                createCustomer(name, surname, companyName, nip, email, address, telephone)
+                val customer = Customer(
+                    "", arrayListOf(), nameInput.text.toString(), surnameInput.text.toString(),
+                    companyInput.text.toString(), nipInput.text.toString().toInt(), emailInput.text.toString(),
+                    addressInput.text.toString(), telephoneInput.text.toString().toInt()
+                )
+                createCustomer(customer)
                 success(findViewById(android.R.id.content))
+                finish()
             } catch (e: NumberFormatException) {
-                fail(findViewById(android.R.id.content))
+                fail(findViewById(android.R.id.content),  R.string.failure)
             }
         }
-
     }
 
-    private fun createCustomer(
-        name: String, surname: String, companyName: String,
-        NIP: Int, email: String, address: String, telephone: Int
-    ) {
+    private fun createCustomer(customer: Customer) {
         AsyncTask.execute {
             val customerReference = FirebaseDatabase.getInstance().getReference("Customer")
-            val id = customerReference.push().key as String
-            val customer = Customer(id, arrayListOf(), name, surname, companyName, NIP, email, address, telephone)
-            customerReference.child(id).setValue(customer);
+            val customerId = customerReference.push().key as String
+            customer.customerId = customerId
+            customerReference.child(customerId).setValue(customer);
         }
     }
-    private fun fail(view: View) {
-        val snackbar = Snackbar.make(
-            view,
-            R.string.add_equipment_failure,
-            Snackbar.LENGTH_LONG
-        )
-        snackbar.view.setBackgroundColor(Color.RED)
-        snackbar.show()
-    }
-
-    private fun success(view: View) {
-        val snackbar = Snackbar.make(view, R.string.add_equipment_success, Snackbar.LENGTH_LONG)
-        snackbar.view.setBackgroundColor(Color.GREEN)
-        snackbar.show()
-    }
-
 }
 
 

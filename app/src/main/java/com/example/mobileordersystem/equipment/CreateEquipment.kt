@@ -4,13 +4,14 @@ import android.graphics.Color
 import android.os.AsyncTask
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.mobileordersystem.AbstractDataUpdate
 import com.example.mobileordersystem.R
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.fragment_create_equipment.*
 import java.lang.Error
 
-class CreateEquipment : AppCompatActivity() {
+class CreateEquipment : AbstractDataUpdate() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,7 +25,7 @@ class CreateEquipment : AppCompatActivity() {
                     priceInput.text.toString().toFloat()
                 )
             } catch (e: NumberFormatException) {
-                fail()
+                fail(findViewById(R.id.content),R.string.failure)
             }
         }
 
@@ -38,34 +39,15 @@ class CreateEquipment : AppCompatActivity() {
                 val id = equipmentReference.push().key as String
                 val equipment = Equipment(id, name, amount,amount, price)
                 equipmentReference.child(id).setValue(equipment)
-                success()
+                success(findViewById(R.id.content))
                 finish()
             } catch (e: Error) {
-                fail()
+                fail(findViewById(R.id.content), R.string.failure)
             }
         }
     }
 
-    private fun success() {
-        val snackbar = Snackbar.make(
-            findViewById(android.R.id.content),
-            R.string.add_equipment_success,
-            Snackbar.LENGTH_LONG
-        )
-        snackbar.view.setBackgroundColor(Color.GREEN)
-        snackbar.show()
-    }
 
-    private fun fail() {
-        val snackbar =
-            Snackbar.make(
-                findViewById(android.R.id.content),
-                R.string.add_equipment_failure,
-                Snackbar.LENGTH_LONG
-            )
-        snackbar.view.setBackgroundColor(Color.RED)
-        snackbar.show()
-    }
 
 
 }

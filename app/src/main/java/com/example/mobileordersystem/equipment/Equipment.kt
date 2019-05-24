@@ -28,7 +28,7 @@ class Equipment(
         )
     }
     override fun toString(): String {
-        return name+" - "+" cena: "+price
+        return name+" "+amountLeft+"/"+amount +" "+price+" zł"
     }
 
 

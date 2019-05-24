@@ -33,7 +33,6 @@ class SignInActivity : AppCompatActivity() {
     private lateinit var mAuth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.sign_in)
         mAuth = FirebaseAuth.getInstance()

@@ -6,10 +6,10 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
 
 abstract class AbstractDataUpdate : AppCompatActivity() {
-    protected fun fail(view: View) {
+    protected fun fail(view: View, message: Int) {
         val snackbar = Snackbar.make(
             view,
-            R.string.add_equipment_failure,
+            message,
             Snackbar.LENGTH_LONG
         )
         snackbar.view.setBackgroundColor(Color.RED)

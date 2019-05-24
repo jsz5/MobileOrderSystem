@@ -1,14 +1,14 @@
 package com.example.mobileordersystem.customer
 
 import android.content.Context
+import android.content.Intent
 import android.os.AsyncTask
 import android.os.Bundle
+import android.os.Parcelable
 import android.util.Log
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.GravityCompat
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -18,8 +18,8 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.fragment_customer.*
+import kotlinx.android.synthetic.main.fragment_customer.addCustomer
 
 class CustomerFragment : androidx.fragment.app.Fragment() {
 
@@ -27,6 +27,7 @@ class CustomerFragment : androidx.fragment.app.Fragment() {
     lateinit var myAdapter: CustomerAdapter
     val customerList: MutableList<Customer> = mutableListOf()
     private val databaseReference = FirebaseDatabase.getInstance().reference
+    private val BUNDLE_RECYCLER_LAYOUT = "classname.recycler.layout"
 
     companion object {
         fun newInstance(): CustomerFragment = CustomerFragment()
@@ -57,13 +58,17 @@ class CustomerFragment : androidx.fragment.app.Fragment() {
         })
 
         materialToolbar.setNavigationOnClickListener { (activity as HomeActivity).openDrawer() }
+        addCustomer.setOnClickListener {
+            val intent = Intent(activity, CreateCustomer::class.java)
+            startActivity(intent)
+        }
 
     }
 
 
     private fun getCustomerList() {
         AsyncTask.execute {
-            val equipmentListener = object : ValueEventListener {
+            val customerListener = object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
                     customerList.clear()
                     dataSnapshot.children.mapNotNullTo(customerList) { it.getValue<Customer>(Customer::class.java) }
@@ -75,8 +80,10 @@ class CustomerFragment : androidx.fragment.app.Fragment() {
                     println("loadPost:onCancelled ${databaseError.toException()}")
                 }
             }
-            databaseReference.child("Customer").addListenerForSingleValueEvent(equipmentListener)
+            databaseReference.child("Customer").addListenerForSingleValueEvent(customerListener)
         }
     }
+
+
 
 }

@@ -54,14 +54,14 @@
     <string name="dont_have_account">Nie masz jeszcze konta?</string>
 
     <string name="add_equipment_success">Sprzęt został dodany!</string>
-    <string name="add_equipment_failure">Wystąpił błąd!</string>
-
+    <string name="failure">Wystąpił błąd!</string>
+    <string name="not_available">Sprzęt niedostępny!</string>
     <string name="order_name">Nazwa zamówienia</string>
     <string name="items">Sprzęt</string>
     <string name="customer">Klient</string>
     <string name="rental_date">Data wypożyczenia</string>
     <string name="return_date">Data zwrotu</string>
-    <string name="discount">Rabat</string>
+    <string name="discount">Rabat %</string>
     <string name="sum_price">Cena zamówienia</string>
 
     <string name="customer_name">Imię</string>
@@ -74,4 +74,5 @@
     <string name="add_eq_fab_label">Dodaj sprzęt</string>
     <string name="add_customer_fab_label">Dodaj klienta</string>
     <string name="add_order_fab_label">Dodaj zamówienie</string>
+    <string name="night_mode_switch_label">Ciemny motyw</string>
 </resources>
