@@ -48,13 +48,17 @@
     <string name="item_name">Item name</string>
     <string name="amount">Amount</string>
     <string name="price_day">Price/day</string>
-    <string name="enter_name">Enter the name here</string>
-    <string name="enter_amount">Enter the amount here</string>
-    <string name="enter_price">Enter the price/day here</string>
+    <string name="enter_name">Name</string>
+    <string name="enter_amount">Amount</string>
+    <string name="enter_price">Price/day</string>
     <string name="label_activeOrders">Active Orders</string>
     <string name="label_recent_orders">Recent Orders</string>
     <string name="email_hint_text" translatable="false">E-mail</string>
     <string name="password_hint_text">Password</string>
+    <string name="name_hint_text">Name</string>
+    <string name="label_equipment">Equipment</string>
+
+
 
 
 </resources>
