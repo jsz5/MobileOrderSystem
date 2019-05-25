@@ -8,8 +8,8 @@ data class Order(
     var equipmentId: ArrayList<String>,
     var customerId: String,
     var name: String,
-    var rentalData: String,
-    var returnData: String,
+    var rentalDate: String,
+    var returnDate: String,
     var orderPrice: Float,
     var discount: Float
 ) {
