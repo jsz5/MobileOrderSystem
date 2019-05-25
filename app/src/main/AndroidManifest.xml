@@ -9,12 +9,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".customer.CreateCustomer"></activity>
-        <activity android:name=".order.CreateOrder"></activity>
-        <activity android:name=".equipment.CreateEquipment"></activity>
+        <activity android:name=".equipment.ShowEquipmentActivity"></activity>
+        <activity android:name=".customer.CreateCustomer" />
+        <activity android:name=".order.CreateOrder" />
+        <activity android:name=".equipment.CreateEquipment" />
         <activity android:name=".authorization.ChangePasswordActivity" />
-        <activity android:name=".authorization.SignUpActivity"></activity>
-        <activity android:name=".authorization.ForgotPasswordActivity"></activity>
+        <activity android:name=".authorization.SignUpActivity" />
+        <activity android:name=".authorization.ForgotPasswordActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".HomeActivity" />
         <activity android:name=".authorization.SignInActivity">
@@ -24,7 +25,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
     </application>
 
 </manifest>
