@@ -40,8 +40,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/returnDate"
         app:layout_constraintStart_toStartOf="@+id/name"
+        app:layout_constraintTop_toTopOf="@+id/amount"
         tools:text="Price" />
 
     <TextView

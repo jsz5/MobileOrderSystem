@@ -22,8 +22,8 @@ class OrderAdapter(val items : MutableList<Order>, val context: Context) : Recyc
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        val rentalDate = items[position].rentalDate
-        val returnDate = items[position].returnDate
+        val rentalDate = items[position].rentalData
+        val returnDate = items[position].returnData
 
         holder.name.text = items[position].name
         holder.rentalDate.text = rentalDate
