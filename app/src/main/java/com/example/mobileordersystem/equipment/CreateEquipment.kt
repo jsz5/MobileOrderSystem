@@ -1,12 +1,11 @@
 package com.example.mobileordersystem.equipment
 
-import android.graphics.Color
+
 import android.os.AsyncTask
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.EditText
 import com.example.mobileordersystem.AbstractDataUpdate
 import com.example.mobileordersystem.R
-import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.fragment_create_equipment.*
 import java.lang.Error
@@ -31,6 +30,28 @@ class CreateEquipment : AbstractDataUpdate() {
 
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+
+        for(i in 0..linearLayout.childCount) {
+            val view = linearLayout.getChildAt(i)
+            if(view is EditText) {
+                outState.putString(view.id.toString(), view.text.toString())
+            }
+        }
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
+        super.onRestoreInstanceState(savedInstanceState)
+        for(i in 0..linearLayout.childCount) {
+            val view = linearLayout.getChildAt(i)
+            if(view is EditText) {
+                val text = savedInstanceState?.getString(view.id.toString())
+                view.setText(text)
+            }
+        }
+    }
+
     private fun createEquipment(name: String, amount: Int, price: Float) {
 
         AsyncTask.execute {
@@ -39,10 +60,10 @@ class CreateEquipment : AbstractDataUpdate() {
                 val id = equipmentReference.push().key as String
                 val equipment = Equipment(id, name, amount,amount, price)
                 equipmentReference.child(id).setValue(equipment)
-                success(findViewById(R.id.content))
+                success(linearLayout)
                 finish()
             } catch (e: Error) {
-                fail(findViewById(R.id.content), R.string.failure)
+                fail(linearLayout, R.string.failure)
             }
         }
     }

@@ -56,6 +56,28 @@ class CreateOrder :AbstractDataUpdate() {
 
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+
+        for(i in 0..linearLayout.childCount) {
+            val view = linearLayout.getChildAt(i)
+            if(view is EditText) {
+                outState.putString(view.id.toString(), view.text.toString())
+            }
+        }
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
+        super.onRestoreInstanceState(savedInstanceState)
+        for(i in 0..linearLayout.childCount) {
+            val view = linearLayout.getChildAt(i)
+            if(view is EditText) {
+                val text = savedInstanceState?.getString(view.id.toString())
+                view.setText(text)
+            }
+        }
+    }
+
     private fun setDatePickers() {
         var calendar:Calendar=Calendar.getInstance()
         calendar.set(calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.MONTH))

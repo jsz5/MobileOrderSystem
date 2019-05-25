@@ -1,21 +1,14 @@
 package com.example.mobileordersystem.customer
 
 
-import android.app.Activity
-import android.content.Intent
-import android.graphics.Color
 import android.os.AsyncTask
 import android.os.Bundle
-import android.view.View
-import androidx.appcompat.app.AppCompatActivity
+import android.widget.EditText
+import android.widget.TextView
 import com.example.mobileordersystem.AbstractDataUpdate
 import com.example.mobileordersystem.R
-import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.fragment_create_customer.*
-import kotlinx.android.synthetic.main.fragment_create_order.nameInput
-import kotlinx.android.synthetic.main.fragment_create_order.save
-import java.lang.Exception
 
 class CreateCustomer : AbstractDataUpdate() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,10 +22,32 @@ class CreateCustomer : AbstractDataUpdate() {
                     addressInput.text.toString(), telephoneInput.text.toString().toInt()
                 )
                 createCustomer(customer)
-                success(findViewById(android.R.id.content))
+                success(linearLayout)
                 finish()
             } catch (e: NumberFormatException) {
-                fail(findViewById(android.R.id.content),  R.string.failure)
+                fail(linearLayout,  R.string.failure)
+            }
+        }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+
+        for(i in 0..linearLayout.childCount) {
+            val view = linearLayout.getChildAt(i)
+            if(view is EditText) {
+                outState.putString(view.id.toString(), view.text.toString())
+            }
+        }
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
+        super.onRestoreInstanceState(savedInstanceState)
+        for(i in 0..linearLayout.childCount) {
+            val view = linearLayout.getChildAt(i)
+            if(view is EditText) {
+                val text = savedInstanceState?.getString(view.id.toString())
+                view.setText(text)
             }
         }
     }
@@ -42,7 +57,7 @@ class CreateCustomer : AbstractDataUpdate() {
             val customerReference = FirebaseDatabase.getInstance().getReference("Customer")
             val customerId = customerReference.push().key as String
             customer.customerId = customerId
-            customerReference.child(customerId).setValue(customer);
+            customerReference.child(customerId).setValue(customer)
         }
     }
 }
