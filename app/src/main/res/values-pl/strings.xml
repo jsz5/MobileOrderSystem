@@ -50,6 +50,8 @@
     <string name="cc_address_hint_text">Adres</string>
     <string name="cc_telephone_hint_text">Telefon</string>
     <string name="cc_new_customer">Nowy klient</string>
+    <string name="cc_edit_customer">Edycja Klienta</string>
+    <string name="cc_save_edit">ZAPISZ ZMIANY</string>
 
     <!-- create_equipment strings -->
     <string name="ce_save">DODAJ</string>
@@ -57,6 +59,8 @@
     <string name="ce_amount_hint_text">Ilość</string>
     <string name="ce_name_hint_text">Nazwa</string>
     <string name="ce_new_equipment">Nowy Sprzęt</string>
+    <string name="ce_edit_equipment">Edytuj Sprzęt</string>
+    <string name="ce_save_edit">ZAPISZ ZMIANY</string>
 
     <!-- create_order strings -->
     <string name="co_new_order">Nowe zamówienie</string>
