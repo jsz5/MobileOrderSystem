@@ -108,6 +108,7 @@
     <string name="add_customer_fab_label">Add customer</string>
     <string name="add_order_fab_label">Add order</string>
     <string name="night_mode_switch_label">Night mode</string>
+    <string name="toolbar_search">Search...</string>
 
 
 </resources>

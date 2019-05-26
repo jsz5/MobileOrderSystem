@@ -5,6 +5,8 @@ import android.content.Intent
 import android.graphics.*
 import android.os.AsyncTask
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -13,21 +15,22 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.mobileordersystem.HomeActivity
 import com.example.mobileordersystem.R
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.fragment_equipment.*
-
 
 
 class EquipmentFragment : androidx.fragment.app.Fragment() {
 
     private val TAG = "EquipmentFragment"
     lateinit var myAdapter: EquipmentAdapter
-    var item=0
+    var item = 0
     val equipmentList: MutableList<Equipment> = mutableListOf()
-
+    var equipmentListCopy: MutableList<Equipment> = mutableListOf()
     private val p = Paint()
     private val databaseReference = FirebaseDatabase.getInstance().reference
+    var searchPattern: String = ""
 
     companion object {
         fun newInstance(): EquipmentFragment = EquipmentFragment()
@@ -61,7 +64,58 @@ class EquipmentFragment : androidx.fragment.app.Fragment() {
             }
         })
 
+        addEquipment.setOnClickListener {
+            val intent = Intent(context, CreateEquipment::class.java)
+            startActivity(intent)
+        }
 
+        menuTrigger.setOnClickListener {
+            (activity as HomeActivity).openDrawer()
+        }
+
+        searchInput.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                search()
+            }
+
+        })
+    }
+
+    private fun search() {
+        if(searchInput != null) {
+            searchPattern = searchInput.text.toString()
+            if (searchPattern.isBlank()) {
+                equipmentList.clear()
+                for (order in equipmentListCopy) {
+                    equipmentList.add(order)
+                }
+            } else {
+                equipmentList.clear()
+                for (order in equipmentListCopy) {
+                    equipmentList.add(order)
+                    val name = order.name
+                    if (!name.contains(searchPattern, true)) {
+                        equipmentList.remove(order)
+                    }
+                }
+            }
+            myAdapter.notifyDataSetChanged()
+        }
+    }
+
+    private fun copyEquipment() {
+        equipmentListCopy.clear()
+        for(order in  equipmentList) {
+            equipmentListCopy.add(order)
+        }
     }
 
     private fun getEquipmentList() {
@@ -71,6 +125,8 @@ class EquipmentFragment : androidx.fragment.app.Fragment() {
                     equipmentList.clear()
                     dataSnapshot.children.mapNotNullTo(equipmentList) { it.getValue<Equipment>(Equipment::class.java) }
                     Log.i(TAG, equipmentList.size.toString())
+                    copyEquipment()
+                    search()
                     myAdapter.notifyDataSetChanged()
                 }
 
@@ -96,7 +152,7 @@ class EquipmentFragment : androidx.fragment.app.Fragment() {
 
                 override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                     if (direction == ItemTouchHelper.LEFT) {
-                        item=viewHolder.adapterPosition
+                        item = viewHolder.adapterPosition
                         confirmDialog(viewHolder.adapterPosition)
                     } else {
                         val intent = Intent(activity, CreateEquipment::class.java)
@@ -168,7 +224,8 @@ class EquipmentFragment : androidx.fragment.app.Fragment() {
         val itemTouchHelper = ItemTouchHelper(simpleItemTouchCallback)
         itemTouchHelper.attachToRecyclerView(eqContainer)
     }
-    protected fun confirmDialog(item: Int){
+
+    protected fun confirmDialog(item: Int) {
         val ft = activity!!.supportFragmentManager.beginTransaction()
         val newFragment = SomeDialog(myAdapter, item)
         newFragment.show(ft, "dialog")
