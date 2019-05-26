@@ -1,6 +1,8 @@
 package com.example.mobileordersystem.equipment
 
 import android.content.Context
+import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,13 +24,23 @@ class EquipmentAdapter(val items : MutableList<Equipment>, val context: Context)
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        val price = "${items[position].price}zł"
-        var amount = "${items[position].amount}"
-        amount = "$amount/$amount"
+        val item = items[position]
+        val price = "${item.price}zł"
+        val amount = "${item.amountLeft}/${item.amount}"
 
-        holder.name.text = items[position].name
+        holder.name.text = item.name
         holder.amount.text = amount
         holder.price.text = price
+        holder.itemView.setOnClickListener {
+            val intent = Intent(context, ShowEquipmentActivity::class.java)
+            intent.putExtra("id", item.id)
+            intent.putExtra("name", item.name)
+            intent.putExtra("amount", item.amount)
+            intent.putExtra("amountLeft", item.amountLeft)
+            intent.putExtra("price", item.price)
+            context.startActivity(intent)
+            Log.i(TAG, "clicked $position")
+        }
     }
 
 

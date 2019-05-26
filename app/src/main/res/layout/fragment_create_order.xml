@@ -6,159 +6,197 @@
     android:fillViewport="false"
     android:id="@+id/content">
 
-    <LinearLayout
+    <RelativeLayout
+        android:id="@+id/relativeRoot3"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:id="@+id/linearLayout"
-        android:padding="20dp">
+        android:layout_height="wrap_content">
+
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar3"
+        style="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorAccent">
 
         <TextView
-            android:id="@+id/nameShow"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:layout_weight="0.5"
-            android:text="@string/order_name" />
-
-        <EditText
-            android:id="@+id/nameInput"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="0.15"
-            android:ems="10"
-            android:inputType="text" />
+            android:text="@string/co_new_order"
+            android:textColor="@color/white"
+            android:textAllCaps="true"
+            android:textSize="18sp" />
 
-        <TextView
-            android:id="@+id/itemsShow"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:layout_weight="0"
-            android:text="@string/items" />
+    </androidx.appcompat.widget.Toolbar>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/newSpinner">
+            android:orientation="vertical"
+            android:layout_marginTop="40dp"
+            android:id="@+id/linearLayout"
+            android:padding="20dp">
 
-            <Spinner
-                android:id="@+id/equipmentInput"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp" />
-            <EditText
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/amount"
-                />
+                android:layout_margin="0dp"
+                android:hint="@string/co_name_hint_text"
+                app:boxCornerRadiusBottomEnd="20dp"
+                app:boxCornerRadiusBottomStart="20dp"
+                app:boxCornerRadiusTopEnd="20dp"
+                app:boxCornerRadiusTopStart="20dp"
+                app:boxStrokeColor="@color/colorAccent"
+                app:hintTextColor="@color/colorAccentLight">
 
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/nameInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="text" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <TextView
+                android:id="@+id/itemsShow"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_weight="0"
+                android:text="@string/items" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/newSpinner">
+
+                <Spinner
+                    android:id="@+id/equipmentInput"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp" />
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/amount"
+                    />
+
+
+            </LinearLayout>
+            <Button
+                android:id="@+id/addEquipment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/colorPrimary"
+                android:text="@string/add" />
+
+
+            <TextView
+                android:id="@+id/customerShow"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_weight="0.10"
+                android:paddingTop="2dp"
+                android:text="@string/customer" />
+
+            <Spinner
+                android:id="@+id/customerInput"
+                android:layout_width="fill_parent"
+                android:layout_height="40dp"
+                android:layout_weight="0.05" />
+
+            <Button
+                android:id="@+id/addCustomer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:backgroundTint="@color/colorPrimary"
+                android:text="@string/add" />
+
+            <TextView
+                android:id="@+id/rentalDateShow"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_weight="0.10"
+                android:paddingTop="2dp"
+                android:text="@string/rental_date" />
+
+            <Button
+                android:id="@+id/rentalDateInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:backgroundTint="@color/colorPrimary"
+                android:onClick="showDatePickerDialog" />
+
+            <TextView
+                android:id="@+id/renturnDateShow"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_weight="0.10"
+                android:paddingTop="2dp"
+                android:text="@string/return_date" />
+
+            <Button
+                android:id="@+id/returnDateInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:backgroundTint="@color/colorPrimary"
+                android:onClick="showDatePickerDialog" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="0dp"
+                android:hint="@string/co_discount_hint_text"
+                app:boxCornerRadiusBottomEnd="20dp"
+                app:boxCornerRadiusBottomStart="20dp"
+                app:boxCornerRadiusTopEnd="20dp"
+                app:boxCornerRadiusTopStart="20dp"
+                app:boxStrokeColor="@color/colorAccent"
+                app:hintTextColor="@color/colorAccentLight">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/discountInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="text" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <TextView
+                android:id="@+id/sumPriceShow"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_weight="0.05"
+                android:paddingTop="2dp"
+                android:text="@string/sum_price" />
+
+            <TextView
+                android:id="@+id/sumPriceInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.15"
+                android:ems="10"
+                android:hint="0"
+               />
+
+            <Button
+                android:id="@+id/save"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_weight="0"
+                android:backgroundTint="@color/colorPrimary"
+                android:onClick="saveTask"
+                android:text="@string/co_save" />
 
         </LinearLayout>
-        <Button
-            android:id="@+id/addEquipment"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/colorPrimary"
-            android:text="@string/add" />
-
-
-        <TextView
-            android:id="@+id/customerShow"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:layout_weight="0.10"
-            android:paddingTop="2dp"
-            android:text="@string/customer" />
-
-        <Spinner
-            android:id="@+id/customerInput"
-            android:layout_width="fill_parent"
-            android:layout_height="40dp"
-            android:layout_weight="0.05" />
-
-        <Button
-            android:id="@+id/addCustomer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="0"
-            android:backgroundTint="@color/colorPrimary"
-            android:text="@string/add" />
-
-        <TextView
-            android:id="@+id/rentalDateShow"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:layout_weight="0.10"
-            android:paddingTop="2dp"
-            android:text="@string/rental_date" />
-
-        <Button
-            android:id="@+id/rentalDateInput"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0"
-            android:backgroundTint="@color/colorPrimary"
-            android:onClick="showDatePickerDialog" />
-
-        <TextView
-            android:id="@+id/renturnDateShow"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:layout_weight="0.10"
-            android:paddingTop="2dp"
-            android:text="@string/return_date" />
-
-        <Button
-            android:id="@+id/returnDateInput"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0"
-            android:backgroundTint="@color/colorPrimary"
-            android:onClick="showDatePickerDialog" />
-
-        <TextView
-            android:id="@+id/discountShow"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:layout_weight="0.05"
-            android:paddingTop="2dp"
-            android:text="@string/discount" />
-
-        <EditText
-            android:id="@+id/discountInput"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.15"
-            android:ems="10"
-            android:inputType="text" />
-
-        <TextView
-            android:id="@+id/sumPriceShow"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:layout_weight="0.05"
-            android:paddingTop="2dp"
-            android:text="@string/sum_price" />
-
-        <TextView
-            android:id="@+id/sumPriceInput"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.15"
-            android:ems="10"
-            android:hint="0"
-           />
-
-        <Button
-            android:id="@+id/save"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            android:layout_weight="0"
-            android:backgroundTint="@color/colorPrimary"
-            android:onClick="saveTask"
-            android:text="@string/save" />
-
-    </LinearLayout>
+    </RelativeLayout>
 </ScrollView>
 
 

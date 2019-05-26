@@ -13,7 +13,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        app:title="ZALOGUJ"
+        app:title="@string/signIntitle"
         app:titleTextColor="@color/colorAccent" />
 
 

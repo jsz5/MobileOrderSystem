@@ -61,6 +61,7 @@ class EquipmentFragment : androidx.fragment.app.Fragment() {
             }
         })
 
+
     }
 
     private fun getEquipmentList() {
