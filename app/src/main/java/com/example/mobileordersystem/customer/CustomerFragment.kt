@@ -27,7 +27,6 @@ class CustomerFragment : androidx.fragment.app.Fragment() {
     lateinit var myAdapter: CustomerAdapter
     val customerList: MutableList<Customer> = mutableListOf()
     private val databaseReference = FirebaseDatabase.getInstance().reference
-    private val BUNDLE_RECYCLER_LAYOUT = "classname.recycler.layout"
 
     companion object {
         fun newInstance(): CustomerFragment = CustomerFragment()
@@ -83,7 +82,6 @@ class CustomerFragment : androidx.fragment.app.Fragment() {
             databaseReference.child("Customer").addListenerForSingleValueEvent(customerListener)
         }
     }
-
 
 
 }

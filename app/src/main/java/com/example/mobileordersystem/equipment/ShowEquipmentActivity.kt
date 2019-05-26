@@ -12,49 +12,39 @@ import kotlinx.android.synthetic.main.activity_show_equipment.*
 class ShowEquipmentActivity : AppCompatActivity() {
 
     private val TAG = "ShowEquipmentActivity"
-    lateinit var id: String
-    lateinit var name: String
-    var amount: Int = 0
-    var amountLeft: Int = 0
-    var price: Float = 0f
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_show_equipment)
 
         val extras = intent.extras
-        id = extras.getString("id")
-        name = extras.getString("name")
-        amount = extras.getInt("amount")
-        amountLeft = extras.getInt("amountLeft")
-        price = extras.getFloat("price")
+        val id = extras.getString("id")
+        val name = extras.getString("name")
+        val amount = extras.getInt("amount")
+        val amountLeft = extras.getInt("amountLeft")
+        val price = extras.getFloat("price")
 
         nameInput.setText(name)
         amountInput.setText(amount.toString())
         priceInput.setText(price.toString())
 
-    }
+        save.setOnClickListener {
+            val ref = FirebaseDatabase.getInstance().getReference("Equipment")
 
+            Log.i(TAG, id)
+            val newAmountLeft = amountLeft + (amountInput.text.toString().toInt() - amount)
 
-    fun save(view: View) {
+            ref.child(id).updateChildren(
+                mapOf(
+                    "name" to nameInput.text.toString(),
+                    "amount" to amountInput.text.toString().toInt(),
+                    "amountLeft" to newAmountLeft,
+                    "price" to priceInput.text.toString().toFloat()
+                )
+            )
 
+            finish()
+        }
 
-        val ref = FirebaseDatabase.getInstance().getReference("Equipment")
-
-       Log.i(TAG, id)
-        val extras = intent.extras
-        amount = extras.getInt("amount")
-        amountLeft = extras.getInt("amountLeft")
-        val amountLeft = amountLeft + (amountInput.text.toString().toInt() - amount)
-
-
-        ref.child(id).updateChildren(mapOf(
-            "name" to nameInput.text.toString(),
-            "amount" to amountInput.text.toString().toInt(),
-            "amountLeft" to amountLeft,
-            "price" to priceInput.text.toString().toFloat()
-        ))
-
-        finish()
     }
 }
