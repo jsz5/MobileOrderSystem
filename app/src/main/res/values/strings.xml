@@ -43,6 +43,30 @@
     <string name="continueSignUp">Continue </string>
     <string name="notVerified">Email is not verified</string>
 
+    <!-- create_customer strings -->
+    <string name="cc_save">ADD</string>
+    <string name="cc_name_hint_text">Name</string>
+    <string name="cc_surname_hint_text">Surname</string>
+    <string name="cc_company_hint_text">Company</string>
+    <string name="cc_nip_hint_text">NIP</string>
+    <string name="cc_email_hint_text" translatable="false">E-mail</string>
+    <string name="cc_address_hint_text">Address</string>
+    <string name="cc_telephone_hint_text">Telephone</string>
+    <string name="cc_new_customer">New Customer</string>
+
+    <!-- create_equipment strings -->
+    <string name="ce_save">ADD</string>
+    <string name="ce_price_hint_text">Price/day</string>
+    <string name="ce_amount_hint_text">Amount</string>
+    <string name="ce_name_hint_text">Name</string>
+    <string name="ce_new_equipment">New Equipment</string>
+
+    <!-- create_order strings -->
+    <string name="co_new_order">New Order</string>
+    <string name="co_name_hint_text">Order name</string>
+    <string name="co_discount_hint_text">Discount %</string>
+    <string name="co_save">DODAJ</string>
+
     <string name="adding_item">Adding item</string>
     <string name="add_button">Add</string>
     <string name="item_name">Item name</string>
@@ -54,6 +78,9 @@
     <string name="label_activeOrders">Active Orders</string>
     <string name="label_recent_orders">Recent Orders</string>
     <string name="email_hint_text" translatable="false">E-mail</string>
+    <string name="name_hint_text">Name</string>
+    <string name="signUptitle">SIGN UP</string>
+    <string name="signIntitle">SIGN IN</string>
     <string name="password_hint_text">Password</string>
     <string name="dont_have_account">Don\'t have an account yet?</string>
 
@@ -68,6 +95,8 @@
     <string name="discount">Discount %</string>
     <string name="sum_price">Order price</string>
 
+
+
     <string name="customer_name">Name</string>
     <string name="customer_surname">Surname</string>
     <string name="customer_company">Company name</string>
@@ -79,4 +108,6 @@
     <string name="add_customer_fab_label">Add customer</string>
     <string name="add_order_fab_label">Add order</string>
     <string name="night_mode_switch_label">Night mode</string>
+
+
 </resources>

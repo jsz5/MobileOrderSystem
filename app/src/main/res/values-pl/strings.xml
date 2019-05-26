@@ -40,6 +40,30 @@
     <string name="continueSignUp">Kontunuuj </string>
     <string name="notVerified">Email nie został zweryfikowany</string>
 
+    <!-- create_customer strings -->
+    <string name="cc_save">DODAJ</string>
+    <string name="cc_name_hint_text">Imie</string>
+    <string name="cc_surname_hint_text">Nazwisko</string>
+    <string name="cc_company_hint_text">Firma</string>
+    <string name="cc_nip_hint_text">NIP</string>
+    <string name="cc_email_hint_text" translatable="false">E-mail</string>
+    <string name="cc_address_hint_text">Adres</string>
+    <string name="cc_telephone_hint_text">Telefon</string>
+    <string name="cc_new_customer">Nowy klient</string>
+
+    <!-- create_equipment strings -->
+    <string name="ce_save">DODAJ</string>
+    <string name="ce_price_hint_text">Cena/Dzień</string>
+    <string name="ce_amount_hint_text">Ilość</string>
+    <string name="ce_name_hint_text">Nazwa</string>
+    <string name="ce_new_equipment">Nowy Sprzęt</string>
+
+    <!-- create_order strings -->
+    <string name="co_new_order">Nowe zamówienie</string>
+    <string name="co_name_hint_text">Nazwa zamówienia</string>
+    <string name="co_discount_hint_text">Rabat %</string>
+    <string name="co_save">DODAJ</string>
+
     <string name="adding_item">Dodawanie przedmiotu</string>
     <string name="add_button">Dodaj</string>
     <string name="item_name">Nazwa przedmiotu</string>
@@ -51,6 +75,9 @@
     <string name="label_activeOrders">Aktywne zamówienia</string>
     <string name="label_recent_orders">Ostatnie zamówienia</string>
     <string name="password_hint_text">Hasło</string>
+    <string name="name_hint_text">Imie i Nazwisko</string>
+    <string name="signUptitle">REJESTRACJA</string>
+    <string name="signIntitle">LOGOWANIE</string>
     <string name="dont_have_account">Nie masz jeszcze konta?</string>
 
     <string name="add_equipment_success">Sprzęt został dodany!</string>

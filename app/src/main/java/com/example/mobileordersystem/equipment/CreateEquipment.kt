@@ -63,7 +63,7 @@ class CreateEquipment : AbstractDataUpdate() {
                 success(linearLayout)
                 finish()
             } catch (e: Error) {
-                fail(linearLayout, R.string.failure)
+                fail(content, R.string.failure)
             }
         }
     }
