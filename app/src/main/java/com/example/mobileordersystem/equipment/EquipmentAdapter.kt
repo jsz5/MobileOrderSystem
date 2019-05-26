@@ -26,7 +26,7 @@ class EquipmentAdapter(val items : MutableList<Equipment>, val context: Context)
 
         val item = items[position]
         val price = "${item.price}zł"
-        val amount = "${item.amount}/${item.amountLeft}"
+        val amount = "${item.amountLeft}/${item.amount}"
 
         holder.name.text = item.name
         holder.amount.text = amount
@@ -36,7 +36,7 @@ class EquipmentAdapter(val items : MutableList<Equipment>, val context: Context)
             intent.putExtra("id", item.id)
             intent.putExtra("name", item.name)
             intent.putExtra("amount", item.amount)
-            intent.putExtra("amountLeft", item.amount)
+            intent.putExtra("amountLeft", item.amountLeft)
             intent.putExtra("price", item.price)
             context.startActivity(intent)
             Log.i(TAG, "clicked $position")

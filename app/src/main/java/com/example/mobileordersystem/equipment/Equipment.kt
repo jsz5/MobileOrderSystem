@@ -5,6 +5,7 @@ import androidx.core.content.res.TypedArrayUtils.getString
 import com.example.mobileordersystem.R
 import com.google.firebase.database.Exclude
 import com.google.firebase.database.IgnoreExtraProperties
+import java.io.Serializable
 
 @IgnoreExtraProperties
 
@@ -14,7 +15,7 @@ class Equipment(
     var amount: Int,
     var amountLeft: Int,
     var price: Float
-) {
+) : Serializable {
     constructor() : this(""," ",0,0,0f)
     @Exclude
     fun toMap(): Map<String, Any?> {
