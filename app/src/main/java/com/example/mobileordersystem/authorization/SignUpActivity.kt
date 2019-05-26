@@ -2,7 +2,6 @@ package com.example.mobileordersystem.authorization
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import android.util.Log
 import android.view.View
 import android.widget.Button
@@ -11,34 +10,49 @@ import android.widget.ProgressBar
 import android.widget.Toast
 import com.example.mobileordersystem.HomeActivity
 import com.example.mobileordersystem.R
-import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.sign_in.*
+import com.google.firebase.auth.UserProfileChangeRequest
 
-class SignUpActivity : AppCompatActivity() {
+
+
+
+class SignUpActivity : AbstractValidation() {
     private lateinit var mAuth: FirebaseAuth
     private val TAG = "FirebaseEmailPassword"
     private lateinit var email: String
     private lateinit var password: String
+    private lateinit var name: String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.sign_up)
         mAuth = FirebaseAuth.getInstance()
+        findViewById<Button>(R.id.signUp).setOnClickListener {
+            signUp()
+        }
     }
 
-    fun signUp(view: View) {
+    fun signUp() {
 
         email = findViewById<EditText>(R.id.emailInput).text.toString()
         password = findViewById<EditText>(R.id.passwordInput).text.toString()
+        name=findViewById<EditText>(R.id.nameInput).text.toString()
+        if (!validateForm(email, password,signUp)) {
+            return
+        }
         createAccount()
     }
 
     private fun createAccount() {
         findViewById<ProgressBar>(R.id.progressBar).visibility=View.VISIBLE
+
         mAuth!!.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
+                    val user = mAuth.currentUser
+                    val profileUpdates = UserProfileChangeRequest.Builder()
+                        .setDisplayName(name).build()
+                    user!!.updateProfile(profileUpdates);
                     Log.e(TAG, "createAccount: Success!")
                     sendEmailVerification()
                 } else {
@@ -54,8 +68,6 @@ class SignUpActivity : AppCompatActivity() {
             val user = FirebaseAuth.getInstance().currentUser
             if (user != null && user.isEmailVerified) {
                 val intent = Intent(this@SignUpActivity, HomeActivity::class.java)
-//                intent.putExtra("user", email)
-//                intent.putExtra("displayName", user.displayName)
                 startActivity(intent)
                 finish()
             }else if(!user!!.isEmailVerified){
@@ -82,5 +94,6 @@ class SignUpActivity : AppCompatActivity() {
         finish()
         super.onBackPressed()
     }
+
 
 }

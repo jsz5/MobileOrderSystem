@@ -26,7 +26,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatDelegate
 
 
-class SignInActivity : AppCompatActivity() {
+class SignInActivity : AbstractValidation() {
 
     private val TAG = "FirebaseEmailPassword"
 
@@ -61,8 +61,6 @@ class SignInActivity : AppCompatActivity() {
     }
     private fun alreadySigned(email: String, displayName: String) {
         val intent = Intent(this@SignInActivity, HomeActivity::class.java)
-//        intent.putExtra("user", email)
-//        intent.putExtra("displayName", displayName)
         startActivity(intent)
         finish()
     }
@@ -75,7 +73,7 @@ class SignInActivity : AppCompatActivity() {
     fun signIn(view: View) {
         val email = emailInput.text.toString()
         val password = passwordInput.text.toString()
-        if (!validateForm(email, password)) {
+        if (!validateForm(email, password,signIn)) {
             return
         }
         findViewById<ProgressBar>(R.id.progressBar).visibility = View.VISIBLE
@@ -89,30 +87,6 @@ class SignInActivity : AppCompatActivity() {
                     findViewById<ProgressBar>(R.id.progressBar).visibility = View.GONE
                 }
             }
-    }
-
-    private fun validateForm(email: String, password: String): Boolean {
-
-        if (TextUtils.isEmpty(email)) {
-//            Toast.makeText(applicationContext, "Enter email address!", Toast.LENGTH_SHORT).show()
-            Snackbar.make(signIn, "Enter email address!", Snackbar.LENGTH_LONG).show()
-            return false
-        }
-
-        if (TextUtils.isEmpty(password)) {
-//            Toast.makeText(applicationContext, "Enter password!", Toast.LENGTH_SHORT).show()
-            Snackbar.make(signIn, "Enter password!", Snackbar.LENGTH_LONG).show()
-            return false
-        }
-
-        if (password.length < 6) {
-//            Toast.makeText(applicationContext, "Password too short, enter minimum 6 characters!", Toast.LENGTH_SHORT)
-//                .show()
-            Snackbar.make(signIn, "Password too short, enter minimum 6 characters!", Snackbar.LENGTH_LONG).show()
-            return false
-        }
-
-        return true
     }
 
 }
