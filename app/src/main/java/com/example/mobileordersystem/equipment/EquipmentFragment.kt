@@ -10,6 +10,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.PopupMenu
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -30,6 +31,7 @@ class EquipmentFragment : AbstractSwipe() {
 
     private val databaseReference = FirebaseDatabase.getInstance().reference
     var searchPattern: String = ""
+    lateinit var sortType : String
 
     companion object {
         fun newInstance(): EquipmentFragment = EquipmentFragment()
@@ -56,6 +58,8 @@ class EquipmentFragment : AbstractSwipe() {
         }
         initSwipe(myAdapter as RecyclerView.Adapter<RecyclerView.ViewHolder>, eqContainer)
 
+        sortType = resources.getString(R.string.sort_by_name)
+
         eqContainer.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
@@ -72,6 +76,7 @@ class EquipmentFragment : AbstractSwipe() {
             (activity as HomeActivity).openDrawer()
         }
 
+
         searchInput.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
 
@@ -86,6 +91,50 @@ class EquipmentFragment : AbstractSwipe() {
             }
 
         })
+
+
+        sortrigger.setOnClickListener {
+            val popup = PopupMenu(context,it)
+            popup.menuInflater.inflate(R.menu.equipment_sort_menu, popup.menu)
+
+            popup.setOnMenuItemClickListener { menuItem ->
+                sortType = menuItem.title.toString()
+                sort()
+                Log.i(TAG, menuItem.title.toString())
+                true
+            }
+            popup.show()
+        }
+
+    }
+
+    private fun sort() {
+        when(sortType) {
+            resources.getString(R.string.sort_by_name) -> {
+                equipmentList.sortBy { it.name.toLowerCase() }
+                copyEquipment()
+                myAdapter.notifyDataSetChanged()
+            }
+            resources.getString(R.string.sort_by_price) -> {
+                equipmentList.sortBy { it.name.toLowerCase() }
+                equipmentList.sortBy { it.price }
+                copyEquipment()
+                myAdapter.notifyDataSetChanged()
+            }
+            resources.getString(R.string.sort_by_amount) -> {
+                equipmentList.sortBy { it.name.toLowerCase() }
+                equipmentList.sortBy { it.amount }
+                copyEquipment()
+                myAdapter.notifyDataSetChanged()
+            }
+            resources.getString(R.string.sort_by_amount_left) -> {
+                equipmentList.sortBy { it.name.toLowerCase() }
+                equipmentList.sortBy { it.amountLeft }
+                copyEquipment()
+                myAdapter.notifyDataSetChanged()
+            }
+        }
+
     }
 
     private fun search() {
@@ -124,6 +173,9 @@ class EquipmentFragment : AbstractSwipe() {
                     equipmentList.clear()
                     dataSnapshot.children.mapNotNullTo(equipmentList) { it.getValue<Equipment>(Equipment::class.java) }
                     Log.i(TAG, equipmentList.size.toString())
+                    if(context != null) {
+                        sort()
+                    }
                     copyEquipment()
                     search()
                     myAdapter.notifyDataSetChanged()

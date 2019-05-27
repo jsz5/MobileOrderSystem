@@ -10,6 +10,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.PopupMenu
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -30,6 +31,7 @@ class OrderFragment : AbstractSwipe() {
     val customerList: MutableList<Customer> = mutableListOf()
     private val databaseReference = FirebaseDatabase.getInstance().reference
     var searchPattern: String = ""
+    lateinit var sortType : String
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
         inflater.inflate(R.layout.fragment_order, container, false)
@@ -48,6 +50,8 @@ class OrderFragment : AbstractSwipe() {
         orderContainer.layoutManager = LinearLayoutManager(context)
         orderContainer.adapter = myAdapter
         orderContainer.itemAnimator = DefaultItemAnimator()
+
+        sortType = resources.getString(R.string.sort_by_name)
 
         addOrder.setOnClickListener {
             val intent = Intent(activity, CreateOrder::class.java)
@@ -84,6 +88,41 @@ class OrderFragment : AbstractSwipe() {
             }
 
         })
+
+        sortrigger.setOnClickListener {
+            val popup = PopupMenu(context,it)
+            popup.menuInflater.inflate(R.menu.order_sort_menu, popup.menu)
+
+            popup.setOnMenuItemClickListener { menuItem ->
+                sortType = menuItem.title.toString()
+                sort()
+                Log.i(TAG, menuItem.title.toString())
+                true
+            }
+            popup.show()
+        }
+    }
+
+    private fun sort() {
+        when(sortType) {
+            resources.getString(R.string.sort_by_name) -> {
+                orderList.sortBy { it.name.toLowerCase() }
+                copyOrders()
+                myAdapter.notifyDataSetChanged()
+            }
+            resources.getString(R.string.sort_by_rental_date) -> {
+                orderList.sortBy { it.name.toLowerCase() }
+                orderList.sortBy { it.rentalData}
+                copyOrders()
+                myAdapter.notifyDataSetChanged()
+            }
+            resources.getString(R.string.sort_by_return_date) -> {
+                orderList.sortBy { it.name.toLowerCase() }
+                orderList.sortBy { it.returnData }
+                copyOrders()
+                myAdapter.notifyDataSetChanged()
+            }
+        }
 
     }
 
@@ -124,6 +163,9 @@ class OrderFragment : AbstractSwipe() {
                     orderList.clear()
                     dataSnapshot.children.mapNotNullTo(orderList) { it.getValue<Order>(Order::class.java) }
                     Log.i(TAG, orderList.size.toString())
+                    if(context != null) {
+                        sort()
+                    }
                     copyOrders()
                     search()
                     myAdapter.notifyDataSetChanged()
