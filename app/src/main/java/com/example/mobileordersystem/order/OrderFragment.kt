@@ -11,14 +11,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.mobileordersystem.AbstractSwipe
 import com.example.mobileordersystem.R
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.fragment_order.*
 
-class OrderFragment : androidx.fragment.app.Fragment() {
+class OrderFragment: AbstractSwipe() {
 
     private val TAG = "OrderFragment"
     lateinit var myAdapter: OrderAdapter
@@ -47,7 +45,7 @@ class OrderFragment : androidx.fragment.app.Fragment() {
             val intent = Intent(activity, CreateOrder::class.java)
             startActivity(intent)
         }
-
+        initSwipe(myAdapter as RecyclerView.Adapter<RecyclerView.ViewHolder>, orderContainer)
 
         orderContainer.addOnScrollListener(object : RecyclerView.OnScrollListener(){
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
@@ -61,10 +59,6 @@ class OrderFragment : androidx.fragment.app.Fragment() {
         })
 
     }
-
-
-
-
     private fun getOrderList() {
         AsyncTask.execute {
             val orderListener = object : ValueEventListener {
@@ -80,6 +74,24 @@ class OrderFragment : androidx.fragment.app.Fragment() {
             }
             databaseReference.child("Order").addValueEventListener(orderListener)
         }
+    }
+    override fun delete(holder: RecyclerView.ViewHolder) {
+        val ref = FirebaseDatabase.getInstance().getReference("Order")
+        val order=myAdapter.items[holder.adapterPosition]
+        updateEquipment(order)
+        updateCustomer(order)
+        ref.child(order.id).removeValue()
+        myAdapter.notifyItemRemoved(holder.adapterPosition)
+    }
+
+    override fun edit(holder: RecyclerView.ViewHolder) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+    private fun updateEquipment(order: Order){
+        return
+    }
+    private fun updateCustomer(order: Order){
+        return
     }
 
 }

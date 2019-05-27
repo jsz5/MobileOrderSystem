@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mobileordersystem.R
+
 import kotlinx.android.synthetic.main.order_item.view.*
 
 class OrderAdapter(val items : MutableList<Order>, val context: Context) : RecyclerView.Adapter<ViewHolder>() {
@@ -17,7 +18,13 @@ class OrderAdapter(val items : MutableList<Order>, val context: Context) : Recyc
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(LayoutInflater.from(context).inflate(R.layout.order_item, parent, false))
+        return ViewHolder(
+            LayoutInflater.from(context).inflate(
+                R.layout.order_item,
+                parent,
+                false
+            )
+        )
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {

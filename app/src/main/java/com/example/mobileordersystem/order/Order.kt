@@ -7,6 +7,7 @@ import kotlin.collections.ArrayList
 class Order(
     var id: String,
     var equipmentId: ArrayList<String>,
+    var amountUsed: ArrayList<Int>,
     var customerId: String,
     var name: String,
     var rentalData: String,
@@ -14,12 +15,13 @@ class Order(
     var orderPrice: Float,
     var discount: Float
 ) {
-    constructor() : this("", arrayListOf(),"", "","","", 0f, 0f)
+    constructor() : this("", arrayListOf(), arrayListOf(),"", "","","", 0f, 0f)
     @Exclude
     fun toMap() : Map<String, Any?> {
         return mapOf(
             "id" to id,
             "equipmentId" to equipmentId,
+            "amountUsed" to amountUsed,
             "customerId" to customerId,
             "name" to name,
             "rentalData" to rentalData,

@@ -102,4 +102,9 @@
     <string name="add_customer_fab_label">Dodaj klienta</string>
     <string name="add_order_fab_label">Dodaj zamówienie</string>
     <string name="night_mode_switch_label">Ciemny motyw</string>
+
+    <string name="delete">Usuwanie</string>
+    <string name="confirm">Czy jesteś pewien, że chcesz kontynuuować?</string>
+    <string name="customer_with_order">Klient ma co najmniej jedno zamówienie</string>
+    <string name="eq_with_order">Sprzęt jest w co najmniej jednym zamówieniu</string>
 </resources>

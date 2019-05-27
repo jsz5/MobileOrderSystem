@@ -16,7 +16,6 @@ import com.example.mobileordersystem.HomeActivity
 import com.example.mobileordersystem.R
 import kotlinx.android.synthetic.main.sign_in.*
 import kotlinx.android.synthetic.main.test.*
-import com.example.mobileordersystem.MainActivity
 import android.app.ProgressDialog
 import android.graphics.Paint
 import android.view.MotionEvent

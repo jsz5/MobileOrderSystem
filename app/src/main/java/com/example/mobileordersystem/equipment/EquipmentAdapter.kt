@@ -19,7 +19,13 @@ class EquipmentAdapter(val items : MutableList<Equipment>, val context: Context)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(LayoutInflater.from(context).inflate(R.layout.equipment_item, parent, false))
+        return ViewHolder(
+            LayoutInflater.from(context).inflate(
+                R.layout.equipment_item,
+                parent,
+                false
+            )
+        )
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
