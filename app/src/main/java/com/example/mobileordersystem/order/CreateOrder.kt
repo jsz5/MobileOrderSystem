@@ -32,6 +32,7 @@ import kotlin.collections.HashMap
 import android.widget.ArrayAdapter
 import android.widget.Toast
 
+@Suppress("DEPRECATION")
 class CreateOrder : AbstractDataUpdate() {
     private val customerList: MutableList<Customer> = mutableListOf()
     private val equipmentList: MutableList<Equipment> = mutableListOf()
@@ -132,8 +133,14 @@ class CreateOrder : AbstractDataUpdate() {
             layout.orientation = LinearLayout.VERTICAL
             val newSpinner = Spinner(this)
             val numberInput = EditText(this)
+
             layout.addView(newSpinner)
             layout.addView(numberInput)
+            numberInput.setTextAppearance(this, R.style.Nasz)
+            numberInput.apply {
+                hint ="Ilość"
+
+            }
             setEquipmentSpinner(newSpinner)
             addPriceListener(numberInput, newSpinner)
         }

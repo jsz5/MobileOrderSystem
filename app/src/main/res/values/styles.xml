@@ -3,11 +3,24 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Customize your theme here. -->
+
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="colorSecondary">@color/colorSecondary</item>
     </style>
 
+
+    <style name="Nasz" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+
+        <item name="hintTextColor">@color/colorAccentLight</item>
+        <item name="boxCornerRadiusBottomEnd">20dp</item>
+        <item name="boxCornerRadiusBottomStart">20dp</item>
+        <item name="boxCornerRadiusTopEnd">20dp</item>
+        <item name="boxCornerRadiusTopStart">20dp</item>
+        <item name="boxStrokeColor">@color/colorAccent</item>
+        <item name="android:ems">10</item>
+
+    </style>
 
 </resources>
