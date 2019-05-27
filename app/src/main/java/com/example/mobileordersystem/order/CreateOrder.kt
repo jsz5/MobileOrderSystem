@@ -32,7 +32,7 @@ import kotlin.collections.HashMap
 import android.widget.ArrayAdapter
 import android.widget.Toast
 
-class CreateOrder :AbstractDataUpdate() {
+class CreateOrder : AbstractDataUpdate() {
     private val customerList: MutableList<Customer> = mutableListOf()
     private val equipmentList: MutableList<Equipment> = mutableListOf()
 
@@ -59,9 +59,9 @@ class CreateOrder :AbstractDataUpdate() {
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
 
-        for(i in 0..linearLayout.childCount) {
+        for (i in 0..linearLayout.childCount) {
             val view = linearLayout.getChildAt(i)
-            if(view is EditText) {
+            if (view is EditText) {
                 outState.putString(view.id.toString(), view.text.toString())
             }
         }
@@ -69,9 +69,9 @@ class CreateOrder :AbstractDataUpdate() {
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
         super.onRestoreInstanceState(savedInstanceState)
-        for(i in 0..linearLayout.childCount) {
+        for (i in 0..linearLayout.childCount) {
             val view = linearLayout.getChildAt(i)
-            if(view is EditText) {
+            if (view is EditText) {
                 val text = savedInstanceState?.getString(view.id.toString())
                 view.setText(text)
             }
@@ -79,9 +79,9 @@ class CreateOrder :AbstractDataUpdate() {
     }
 
     private fun setDatePickers() {
-        var calendar:Calendar=Calendar.getInstance()
-        calendar.set(calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.MONTH))
-        val formatter= DateFormat.getDateInstance(DateFormat.MEDIUM)
+        var calendar: Calendar = Calendar.getInstance()
+        calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.MONTH))
+        val formatter = DateFormat.getDateInstance(DateFormat.MEDIUM)
         returnDateInput.text = formatter.format(calendar.time)
         rentalDateInput.text = formatter.format(calendar.time)
         rentalDateInput.setOnClickListener {
@@ -169,25 +169,29 @@ class CreateOrder :AbstractDataUpdate() {
 
     private fun saveOrder() {
         save.setOnClickListener {
-            var notAvailable=false;
+            var notAvailable = false;
             val layout = newSpinner as LinearLayout
             var i = 0
             val equipments = arrayListOf<String>()
+            val amountUsed= arrayListOf<Int>()
+            val orderId = FirebaseDatabase.getInstance().getReference("Order").push().key as String
             while (i + 1 < layout.childCount) {
                 val spinner = layout.getChildAt(i) as Spinner
                 val amount = layout.getChildAt(i + 1) as EditText
                 val equipment = spinner.selectedItem as Equipment
-                val amountValue:Int
-                if(amount.text.toString()==""){
-                    amountValue=0;
-                }else{
-                    amountValue=amount.text.toString().toInt()
+                val amountValue: Int
+                if (amount.text.toString() == "") {
+                    amountValue = 0;
+                } else {
+                    amountValue = amount.text.toString().toInt()
                 }
-                if(equipment.amountLeft - amountValue>=0){
-                updateEquipment(equipment, equipment.amountLeft - amountValue)
-                equipments.add(equipment.id)
-                }else{
-                    notAvailable=true
+                if (equipment.amountLeft - amountValue >= 0) {
+                    updateEquipment(equipment, equipment.amountLeft - amountValue)
+                    equipments.add(equipment.id)
+                    amountUsed.add(equipment.amountLeft - amountValue)
+                    addOrderToEquipment(orderId, equipment)
+                } else {
+                    notAvailable = true
                     Toast.makeText(
                         this, resources.getString(R.string.not_available),
                         Toast.LENGTH_LONG
@@ -196,15 +200,18 @@ class CreateOrder :AbstractDataUpdate() {
                 i += 2
             }
             val customer = customerInput.selectedItem as Customer
-            val discount:Float = if(discountInput.text.toString()!=""){
+            val discount: Float = if (discountInput.text.toString() != "") {
                 discountInput.text.toString().toFloat()
-            }else{
+            } else {
                 0f
             }
-            if(!notAvailable && rentalDateInput.text.toString()<=returnDateInput.text.toString() &&
-                sumPriceInput.text.toString()!=""&& sumPriceInput.text.toString().toFloat()!=0f) {
+            if (!notAvailable && rentalDateInput.text.toString() <= returnDateInput.text.toString() &&
+                sumPriceInput.text.toString() != "" && sumPriceInput.text.toString().toFloat() != 0f
+            ) {
                 createOrder(
+                    orderId,
                     equipments,
+                    amountUsed,
                     customer.customerId,
                     nameInput.text.toString(),
                     rentalDateInput.text.toString(),
@@ -214,7 +221,7 @@ class CreateOrder :AbstractDataUpdate() {
                     customer
                 )
                 finish()
-            }else{
+            } else {
                 Toast.makeText(
                     this, resources.getString(R.string.failure),
                     Toast.LENGTH_LONG
@@ -225,15 +232,14 @@ class CreateOrder :AbstractDataUpdate() {
         }
     }
 
-    private fun createOrder(
-        equipmentsId: ArrayList<String>, customerId: String, name: String, rentalData: String,
+    private fun createOrder(id: String,
+        equipmentsId: ArrayList<String>, amountUsed: ArrayList<Int>, customerId: String, name: String, rentalData: String,
         returnData: String, orderPrice: Float, discount: Float, customer: Customer
     ) {
         try {
             AsyncTask.execute {
-                val orderReference = FirebaseDatabase.getInstance().getReference("Order")
-                val id = orderReference.push().key as String
-                val order = Order(id, equipmentsId, customerId, name, rentalData, returnData, orderPrice, discount)
+                val orderReference=FirebaseDatabase.getInstance().getReference("Order")
+                val order = Order(id, equipmentsId,amountUsed, customerId, name, rentalData, returnData, orderPrice, discount)
                 orderReference.child(id).setValue(order);
                 updateCustomer(id, customer)
 
@@ -253,6 +259,23 @@ class CreateOrder :AbstractDataUpdate() {
                     val postValues = customer.toMap()
                     val childUpdates = HashMap<String, Any>()
                     childUpdates["/Customer/${customer.customerId}"] = postValues
+                    databaseReference.updateChildren(childUpdates)
+                }
+            }
+        } catch (e: Exception) {
+            fail(findViewById(R.id.content), R.string.failure)
+        }
+    }
+
+    private fun addOrderToEquipment(orderId: String, equipment: Equipment) {
+        try {
+            AsyncTask.execute {
+                val key = databaseReference.child("Equipment").push().key
+                if (key != null) {
+                    equipment.orders.add(orderId)
+                    val postValues = equipment.toMap()
+                    val childUpdates = HashMap<String, Any>()
+                    childUpdates["/Equipment/${equipment.id}"] = postValues
                     databaseReference.updateChildren(childUpdates)
                 }
             }
@@ -344,7 +367,6 @@ class CreateOrder :AbstractDataUpdate() {
             }
         })
     }
-
 
 
 }

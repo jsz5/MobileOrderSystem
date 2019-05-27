@@ -2,6 +2,7 @@ package com.example.mobileordersystem
 
 import android.content.Intent
 import android.content.res.Configuration
+import android.os.AsyncTask
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -16,8 +17,6 @@ import android.widget.CompoundButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES
-import androidx.appcompat.app.AppCompatDelegate.setDefaultNightMode
 import com.example.mobileordersystem.authorization.ChangePasswordActivity
 import com.example.mobileordersystem.authorization.SignInActivity
 import com.example.mobileordersystem.customer.CustomerFragment

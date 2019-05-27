@@ -2,7 +2,6 @@ package com.example.mobileordersystem.equipment
 
 import android.content.Context
 import android.content.Intent
-import android.graphics.*
 import android.os.AsyncTask
 import android.os.Bundle
 import android.text.Editable
@@ -13,23 +12,23 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
 import androidx.recyclerview.widget.DefaultItemAnimator
-import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.mobileordersystem.AbstractSwipe
 import com.example.mobileordersystem.HomeActivity
 import com.example.mobileordersystem.R
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.fragment_equipment.*
 
 
-class EquipmentFragment : androidx.fragment.app.Fragment() {
+class EquipmentFragment : AbstractSwipe() {
 
     private val TAG = "EquipmentFragment"
     lateinit var myAdapter: EquipmentAdapter
-    var item = 0
     val equipmentList: MutableList<Equipment> = mutableListOf()
     var equipmentListCopy: MutableList<Equipment> = mutableListOf()
-    private val p = Paint()
+
     private val databaseReference = FirebaseDatabase.getInstance().reference
     var searchPattern: String = ""
     lateinit var sortType : String
@@ -53,7 +52,11 @@ class EquipmentFragment : androidx.fragment.app.Fragment() {
         eqContainer.layoutManager = LinearLayoutManager(context)
         eqContainer.adapter = myAdapter
         eqContainer.itemAnimator = DefaultItemAnimator()
-        initSwipe()
+        addEquipment.setOnClickListener {
+            val intent = Intent(context, CreateEquipment::class.java)
+            startActivity(intent)
+        }
+        initSwipe(myAdapter as RecyclerView.Adapter<RecyclerView.ViewHolder>, eqContainer)
 
         sortType = resources.getString(R.string.sort_by_name)
 
@@ -68,10 +71,6 @@ class EquipmentFragment : androidx.fragment.app.Fragment() {
             }
         })
 
-        addEquipment.setOnClickListener {
-            val intent = Intent(context, CreateEquipment::class.java)
-            startActivity(intent)
-        }
 
         menuTrigger.setOnClickListener {
             (activity as HomeActivity).openDrawer()
@@ -139,7 +138,7 @@ class EquipmentFragment : androidx.fragment.app.Fragment() {
     }
 
     private fun search() {
-        if(searchInput != null) {
+        if (searchInput != null) {
             searchPattern = searchInput.text.toString()
             if (searchPattern.isBlank()) {
                 equipmentList.clear()
@@ -162,7 +161,7 @@ class EquipmentFragment : androidx.fragment.app.Fragment() {
 
     private fun copyEquipment() {
         equipmentListCopy.clear()
-        for(order in  equipmentList) {
+        for (order in equipmentList) {
             equipmentListCopy.add(order)
         }
     }
@@ -190,97 +189,25 @@ class EquipmentFragment : androidx.fragment.app.Fragment() {
         }
     }
 
-    private fun initSwipe() {
-        val simpleItemTouchCallback =
-            object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
 
-                override fun onMove(
-                    recyclerView: RecyclerView,
-                    viewHolder: RecyclerView.ViewHolder,
-                    target: RecyclerView.ViewHolder
-                ): Boolean {
-                    return false
-                }
+    override fun delete(holder: RecyclerView.ViewHolder) {
+        val ref = FirebaseDatabase.getInstance().getReference("Equipment")
+        val equipment = myAdapter.items[holder.adapterPosition]
 
-                override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                    if (direction == ItemTouchHelper.LEFT) {
-                        item = viewHolder.adapterPosition
-                        confirmDialog(viewHolder.adapterPosition)
-                    } else {
-                        val intent = Intent(activity, CreateEquipment::class.java)
-                        startActivity(intent)
-                        myAdapter.notifyItemChanged(viewHolder.adapterPosition)
-                    }
-                }
+        ref.child(equipment.id).removeValue()
+        myAdapter.notifyItemRemoved(holder.adapterPosition)
 
-                override fun onChildDraw(
-                    c: Canvas,
-                    recyclerView: RecyclerView,
-                    viewHolder: RecyclerView.ViewHolder,
-                    dX: Float,
-                    dY: Float,
-                    actionState: Int,
-                    isCurrentlyActive: Boolean
-                ) {
-                    if (actionState == ItemTouchHelper.ACTION_STATE_SWIPE) {
-
-                        val itemView = viewHolder.itemView
-                        val height = itemView.bottom.toFloat() - itemView.top.toFloat()
-                        val width = height / 3
-
-                        if (dX > 0) {
-                            val trashBinIcon = resources.getDrawable(
-                                R.drawable.edit,
-                                null
-                            )
-                            c.clipRect(
-                                itemView.left.toFloat(), itemView.top.toFloat(), dX, itemView.bottom.toFloat()
-                            )
-                            c.drawColor(Color.parseColor("#388E3C"))
-                            trashBinIcon.bounds = Rect(
-                                (itemView.left.toFloat() + width).toInt(),
-                                (itemView.top.toFloat() + width).toInt(),
-                                (itemView.left.toFloat() + 2 * width).toInt(),
-                                (itemView.bottom.toFloat() - width).toInt()
-                            )
-
-                            trashBinIcon.draw(c)
-
-                        } else {
-                            val editIcon = resources.getDrawable(
-                                R.drawable.delete,
-                                null
-                            )
-                            c.clipRect(
-                                itemView.right.toFloat() + dX,
-                                itemView.top.toFloat(),
-                                itemView.right.toFloat(),
-                                itemView.bottom.toFloat()
-                            )
-
-                            c.drawColor(Color.parseColor("#D32F2F"))
-                            editIcon.bounds = Rect(
-                                (itemView.right.toFloat() - 2 * width).toInt(),
-                                (itemView.top.toFloat() + width).toInt(),
-                                (itemView.right.toFloat() - width).toInt(),
-                                (itemView.bottom.toFloat() - width).toInt()
-                            )
-
-                            editIcon.draw(c)
-
-                        }
-                    }
-                    super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
-                }
-            }
-        val itemTouchHelper = ItemTouchHelper(simpleItemTouchCallback)
-        itemTouchHelper.attachToRecyclerView(eqContainer)
     }
 
-    protected fun confirmDialog(item: Int) {
-        val ft = activity!!.supportFragmentManager.beginTransaction()
-        val newFragment = SomeDialog(myAdapter, item)
-        newFragment.show(ft, "dialog")
+    override fun edit(holder: RecyclerView.ViewHolder) {
+        val item = myAdapter.items[holder.adapterPosition]
+        val intent = Intent(activity, ShowEquipmentActivity::class.java)
+        intent.putExtra("id", item.id)
+        intent.putExtra("name", item.name)
+        intent.putExtra("amount", item.amount)
+        intent.putExtra("amountLeft", item.amountLeft)
+        intent.putExtra("price", item.price)
+        startActivity(intent)
     }
 
 

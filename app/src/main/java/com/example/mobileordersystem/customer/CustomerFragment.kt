@@ -2,6 +2,7 @@ package com.example.mobileordersystem.customer
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.os.AsyncTask
 import android.os.Bundle
 import android.text.Editable
@@ -14,8 +15,10 @@ import android.widget.PopupMenu
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.mobileordersystem.AbstractSwipe
 import com.example.mobileordersystem.HomeActivity
 import com.example.mobileordersystem.R
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -23,7 +26,7 @@ import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.fragment_customer.*
 import kotlinx.android.synthetic.main.fragment_customer.addCustomer
 
-class CustomerFragment : androidx.fragment.app.Fragment() {
+class CustomerFragment : AbstractSwipe() {
 
     private val TAG = "CustomerFragment"
     lateinit var myAdapter: CustomerAdapter
@@ -64,6 +67,9 @@ class CustomerFragment : androidx.fragment.app.Fragment() {
         })
 
 //        materialToolbar.setNavigationOnClickListener { (activity as HomeActivity).openDrawer() }
+
+        initSwipe(myAdapter as RecyclerView.Adapter<RecyclerView.ViewHolder>, customersContainer)
+
         addCustomer.setOnClickListener {
             val intent = Intent(activity, CreateCustomer::class.java)
             startActivity(intent)
@@ -169,6 +175,33 @@ class CustomerFragment : androidx.fragment.app.Fragment() {
             }
             databaseReference.child("Customer").addListenerForSingleValueEvent(customerListener)
         }
+    }
+
+    override fun delete(holder: RecyclerView.ViewHolder) {
+        val ref = FirebaseDatabase.getInstance().getReference("Customer")
+        val customer = myAdapter.items[holder.adapterPosition]
+        if (customer.orderId.isEmpty()) {
+            ref.child(customer.customerId).removeValue()
+            myAdapter.notifyItemRemoved(holder.adapterPosition)
+        } else{
+            myAdapter.notifyItemChanged(holder.adapterPosition)
+            Snackbar.make(view as View, R.string.customer_with_order, Snackbar.LENGTH_LONG).show()
+        }
+
+    }
+
+    override fun edit(holder: RecyclerView.ViewHolder) {
+        val item = myAdapter.items[holder.adapterPosition]
+        val intent = Intent(context, ShowCustomerActivity::class.java)
+        intent.putExtra("customerId", item.customerId)
+        intent.putExtra("name", item.name)
+        intent.putExtra("surname", item.surname)
+        intent.putExtra("companyName", item.companyName)
+        intent.putExtra("nip", item.nip)
+        intent.putExtra("email", item.email)
+        intent.putExtra("address", item.address)
+        intent.putExtra("telephone", item.telephone)
+        startActivity(intent)
     }
 
 

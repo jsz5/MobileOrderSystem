@@ -58,7 +58,7 @@ class CreateEquipment : AbstractDataUpdate() {
             try {
                 val equipmentReference = FirebaseDatabase.getInstance().getReference("Equipment")
                 val id = equipmentReference.push().key as String
-                val equipment = Equipment(id, name, amount,amount, price)
+                val equipment = Equipment(id, name, amount,amount, price, arrayListOf())
                 equipmentReference.child(id).setValue(equipment)
                 success(linearLayout)
                 finish()

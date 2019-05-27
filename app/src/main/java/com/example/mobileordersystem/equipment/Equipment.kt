@@ -14,9 +14,10 @@ class Equipment(
     var name: String,
     var amount: Int,
     var amountLeft: Int,
-    var price: Float
+    var price: Float,
+    var orders: ArrayList<String>
 ) : Serializable {
-    constructor() : this(""," ",0,0,0f)
+    constructor() : this(""," ",0,0,0f, arrayListOf())
     @Exclude
     fun toMap(): Map<String, Any?> {
         return mapOf(
@@ -24,7 +25,8 @@ class Equipment(
             "name" to name,
             "amount" to amount,
             "amountLeft" to amountLeft,
-            "price" to price
+            "price" to price,
+            "orders" to orders
 
         )
     }
