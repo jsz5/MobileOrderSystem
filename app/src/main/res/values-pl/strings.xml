@@ -103,4 +103,13 @@
     <string name="add_order_fab_label">Dodaj zamówienie</string>
     <string name="night_mode_switch_label">Ciemny motyw</string>
     <string name="toolbar_search">Wyszukaj...</string>
+    <string name="sort_title">Sortuj według</string>
+    <string name="sort_by_name">Nazwy</string>
+    <string name="sort_by_price">Ceny</string>
+    <string name="sort_by_amount">Ilość</string>
+    <string name="sort_by_amount_left">Pozostała ilość</string>
+    <string name="sort_by_rental_date">Daty wypożyczenia</string>
+    <string name="sort_by_return_date">Daty zwrotu</string>
+    <string name="sort_by_first_name">Imienia</string>
+    <string name="sort_by_surname">Nazwiska</string>
 </resources>

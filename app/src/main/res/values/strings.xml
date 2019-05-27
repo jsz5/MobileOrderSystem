@@ -109,6 +109,15 @@
     <string name="add_order_fab_label">Add order</string>
     <string name="night_mode_switch_label">Night mode</string>
     <string name="toolbar_search">Search...</string>
+    <string name="sort_title">Sort by</string>
+    <string name="sort_by_name">Name</string>
+    <string name="sort_by_price">Price</string>
+    <string name="sort_by_amount">Amount</string>
+    <string name="sort_by_amount_left">Amount Left</string>
+    <string name="sort_by_rental_date">Rental date</string>
+    <string name="sort_by_return_date">Return Date</string>
+    <string name="sort_by_first_name">First name</string>
+    <string name="sort_by_surname">Surname</string>
 
 
 </resources>

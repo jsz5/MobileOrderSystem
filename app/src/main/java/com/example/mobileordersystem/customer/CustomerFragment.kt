@@ -10,7 +10,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.Animation
+import android.widget.PopupMenu
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -31,6 +31,7 @@ class CustomerFragment : androidx.fragment.app.Fragment() {
     var customerListCopy: MutableList<Customer> = mutableListOf()
     private val databaseReference = FirebaseDatabase.getInstance().reference
     var searchPattern: String = ""
+    lateinit var sortType : String
 
     companion object {
         fun newInstance(): CustomerFragment = CustomerFragment()
@@ -48,6 +49,8 @@ class CustomerFragment : androidx.fragment.app.Fragment() {
         customersContainer.layoutManager = LinearLayoutManager(context)
         customersContainer.adapter = myAdapter
         customersContainer.itemAnimator = DefaultItemAnimator()
+
+        sortType = resources.getString(R.string.sort_by_first_name)
 
         customersContainer.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
@@ -84,6 +87,37 @@ class CustomerFragment : androidx.fragment.app.Fragment() {
             }
 
         })
+
+        sortrigger.setOnClickListener {
+            val popup = PopupMenu(context,it)
+            popup.menuInflater.inflate(R.menu.customer_sort_menu, popup.menu)
+
+            popup.setOnMenuItemClickListener { menuItem ->
+                sortType = menuItem.title.toString()
+                sort()
+                Log.i(TAG, menuItem.title.toString())
+                true
+            }
+            popup.show()
+        }
+
+    }
+
+
+    private fun sort() {
+        when(sortType) {
+            resources.getString(R.string.sort_by_first_name) -> {
+                customerList.sortBy { it.name.toLowerCase() }
+                copyCustomers()
+                myAdapter.notifyDataSetChanged()
+            }
+            resources.getString(R.string.sort_by_surname) -> {
+                customerList.sortBy { it.name.toLowerCase() }
+                customerList.sortBy { it.surname }
+                copyCustomers()
+                myAdapter.notifyDataSetChanged()
+            }
+        }
     }
 
     private fun search() {
@@ -123,6 +157,7 @@ class CustomerFragment : androidx.fragment.app.Fragment() {
                     customerList.clear()
                     dataSnapshot.children.mapNotNullTo(customerList) { it.getValue<Customer>(Customer::class.java) }
                     Log.i("customer", customerList[0].name)
+                    sort()
                     copyCustomers()
                     search()
                     myAdapter.notifyDataSetChanged()

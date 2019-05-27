@@ -31,6 +31,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
+                android:layout_weight="0"
                 android:src="@drawable/ic_side_menu"
                 android:tint="?attr/colorOnSurface" />
 
@@ -38,6 +39,7 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_weight="1"
                 app:boxStrokeWidth="0dp"
                 app:endIconDrawable="@drawable/ic_clear"
                 app:endIconMode="clear_text"
@@ -52,6 +54,16 @@
                     android:hint="@string/toolbar_search" />
 
             </com.google.android.material.textfield.TextInputLayout>
+
+            <ImageView
+                android:id="@+id/sortrigger"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="16dp"
+                android:layout_weight="0"
+                android:src="@drawable/ic_popup"
+                android:tint="?attr/colorOnSurface" />
 
         </LinearLayout>
 
@@ -80,6 +92,6 @@
         android:textSize="16sp"
         app:icon="@drawable/ic_add"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
