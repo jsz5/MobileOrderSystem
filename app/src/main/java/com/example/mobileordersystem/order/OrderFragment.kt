@@ -4,6 +4,8 @@ import android.content.Context
 import android.content.Intent
 import android.os.AsyncTask
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +14,7 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mobileordersystem.AbstractSwipe
+import com.example.mobileordersystem.HomeActivity
 import com.example.mobileordersystem.R
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.fragment_order.*
@@ -21,7 +24,9 @@ class OrderFragment: AbstractSwipe() {
     private val TAG = "OrderFragment"
     lateinit var myAdapter: OrderAdapter
     val orderList: MutableList<Order> = mutableListOf()
+    var orderListCopy: MutableList<Order> = mutableListOf()
     private val databaseReference = FirebaseDatabase.getInstance().reference
+    var searchPattern: String = ""
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
         inflater.inflate(R.layout.fragment_order, container, false)
@@ -58,7 +63,58 @@ class OrderFragment: AbstractSwipe() {
             }
         })
 
+        menuTrigger.setOnClickListener {
+            (activity as HomeActivity).openDrawer()
+        }
+
+        searchInput.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                search()
+            }
+
+        })
+
     }
+
+    private fun search() {
+        if(searchInput != null) {
+            searchPattern = searchInput.text.toString()
+            if (searchPattern.isBlank()) {
+                orderList.clear()
+                for (order in orderListCopy) {
+                    orderList.add(order)
+                }
+            } else {
+                orderList.clear()
+                for (order in orderListCopy) {
+                    orderList.add(order)
+                    val name = order.name
+                    if (!name.contains(searchPattern, true)) {
+                        orderList.remove(order)
+                    }
+                }
+            }
+            myAdapter.notifyDataSetChanged()
+        }
+    }
+
+    private fun copyOrders() {
+        orderListCopy.clear()
+        for(order in  orderList) {
+            orderListCopy.add(order)
+        }
+    }
+
+
+
     private fun getOrderList() {
         AsyncTask.execute {
             val orderListener = object : ValueEventListener {
@@ -66,6 +122,8 @@ class OrderFragment: AbstractSwipe() {
                     orderList.clear()
                     dataSnapshot.children.mapNotNullTo(orderList) { it.getValue<Order>(Order::class.java) }
                     Log.i(TAG, orderList.size.toString())
+                    copyOrders()
+                    search()
                     myAdapter.notifyDataSetChanged()
                 }
                 override fun onCancelled(databaseError: DatabaseError) {

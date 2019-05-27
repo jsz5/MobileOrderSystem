@@ -53,6 +53,9 @@
     <string name="cc_address_hint_text">Address</string>
     <string name="cc_telephone_hint_text">Telephone</string>
     <string name="cc_new_customer">New Customer</string>
+    <string name="cc_edit_customer">Edit Customer</string>
+    <string name="cc_save_edit">SAVE CHANGE</string>
+
 
     <!-- create_equipment strings -->
     <string name="ce_save">ADD</string>
@@ -60,6 +63,8 @@
     <string name="ce_amount_hint_text">Amount</string>
     <string name="ce_name_hint_text">Name</string>
     <string name="ce_new_equipment">New Equipment</string>
+    <string name="ce_edit_equipment">Edit Equipment</string>
+    <string name="ce_save_edit">SAVE CHANGE</string>
 
     <!-- create_order strings -->
     <string name="co_new_order">New Order</string>
@@ -108,6 +113,7 @@
     <string name="add_customer_fab_label">Add customer</string>
     <string name="add_order_fab_label">Add order</string>
     <string name="night_mode_switch_label">Night mode</string>
+    <string name="toolbar_search">Search...</string>
 
     <string name="delete">Delete</string>
     <string name="confirm">Are you sure you want to continue?</string>
