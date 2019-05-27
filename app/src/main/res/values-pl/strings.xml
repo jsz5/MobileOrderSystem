@@ -112,4 +112,13 @@
     <string name="customer_with_order">Klient ma co najmniej jedno zamówienie</string>
     <string name="eq_with_order">Sprzęt jest w co najmniej jednym zamówieniu</string>
     <string name="toolbar_search">Wyszukaj...</string>
+    <string name="sort_title">Sortuj według</string>
+    <string name="sort_by_name">Nazwy</string>
+    <string name="sort_by_price">Ceny</string>
+    <string name="sort_by_amount">Ilość</string>
+    <string name="sort_by_amount_left">Pozostała ilość</string>
+    <string name="sort_by_rental_date">Daty wypożyczenia</string>
+    <string name="sort_by_return_date">Daty zwrotu</string>
+    <string name="sort_by_first_name">Imienia</string>
+    <string name="sort_by_surname">Nazwiska</string>
 </resources>

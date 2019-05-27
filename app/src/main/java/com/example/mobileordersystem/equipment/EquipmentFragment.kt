@@ -10,6 +10,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.PopupMenu
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -21,7 +22,6 @@ import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.fragment_equipment.*
 
 
-
 class EquipmentFragment : AbstractSwipe() {
 
     private val TAG = "EquipmentFragment"
@@ -31,10 +31,12 @@ class EquipmentFragment : AbstractSwipe() {
 
     private val databaseReference = FirebaseDatabase.getInstance().reference
     var searchPattern: String = ""
+    lateinit var sortType : String
 
     companion object {
         fun newInstance(): EquipmentFragment = EquipmentFragment()
     }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         return inflater.inflate(R.layout.fragment_equipment, container, false)
@@ -50,11 +52,13 @@ class EquipmentFragment : AbstractSwipe() {
         eqContainer.layoutManager = LinearLayoutManager(context)
         eqContainer.adapter = myAdapter
         eqContainer.itemAnimator = DefaultItemAnimator()
-        addEquipment.setOnClickListener{
+        addEquipment.setOnClickListener {
             val intent = Intent(context, CreateEquipment::class.java)
             startActivity(intent)
         }
         initSwipe(myAdapter as RecyclerView.Adapter<RecyclerView.ViewHolder>, eqContainer)
+
+        sortType = resources.getString(R.string.sort_by_name)
 
         eqContainer.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
@@ -72,6 +76,7 @@ class EquipmentFragment : AbstractSwipe() {
             (activity as HomeActivity).openDrawer()
         }
 
+
         searchInput.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
 
@@ -86,10 +91,54 @@ class EquipmentFragment : AbstractSwipe() {
             }
 
         })
+
+
+        sortrigger.setOnClickListener {
+            val popup = PopupMenu(context,it)
+            popup.menuInflater.inflate(R.menu.equipment_sort_menu, popup.menu)
+
+            popup.setOnMenuItemClickListener { menuItem ->
+                sortType = menuItem.title.toString()
+                sort()
+                Log.i(TAG, menuItem.title.toString())
+                true
+            }
+            popup.show()
+        }
+
+    }
+
+    private fun sort() {
+        when(sortType) {
+            resources.getString(R.string.sort_by_name) -> {
+                equipmentList.sortBy { it.name.toLowerCase() }
+                copyEquipment()
+                myAdapter.notifyDataSetChanged()
+            }
+            resources.getString(R.string.sort_by_price) -> {
+                equipmentList.sortBy { it.name.toLowerCase() }
+                equipmentList.sortBy { it.price }
+                copyEquipment()
+                myAdapter.notifyDataSetChanged()
+            }
+            resources.getString(R.string.sort_by_amount) -> {
+                equipmentList.sortBy { it.name.toLowerCase() }
+                equipmentList.sortBy { it.amount }
+                copyEquipment()
+                myAdapter.notifyDataSetChanged()
+            }
+            resources.getString(R.string.sort_by_amount_left) -> {
+                equipmentList.sortBy { it.name.toLowerCase() }
+                equipmentList.sortBy { it.amountLeft }
+                copyEquipment()
+                myAdapter.notifyDataSetChanged()
+            }
+        }
+
     }
 
     private fun search() {
-        if(searchInput != null) {
+        if (searchInput != null) {
             searchPattern = searchInput.text.toString()
             if (searchPattern.isBlank()) {
                 equipmentList.clear()
@@ -112,7 +161,7 @@ class EquipmentFragment : AbstractSwipe() {
 
     private fun copyEquipment() {
         equipmentListCopy.clear()
-        for(order in  equipmentList) {
+        for (order in equipmentList) {
             equipmentListCopy.add(order)
         }
     }
@@ -124,10 +173,14 @@ class EquipmentFragment : AbstractSwipe() {
                     equipmentList.clear()
                     dataSnapshot.children.mapNotNullTo(equipmentList) { it.getValue<Equipment>(Equipment::class.java) }
                     Log.i(TAG, equipmentList.size.toString())
+                    if(context != null) {
+                        sort()
+                    }
                     copyEquipment()
                     search()
                     myAdapter.notifyDataSetChanged()
                 }
+
                 override fun onCancelled(databaseError: DatabaseError) {
                     println("loadPost:onCancelled ${databaseError.toException()}")
                 }
@@ -137,21 +190,17 @@ class EquipmentFragment : AbstractSwipe() {
     }
 
 
-    override fun delete(holder: RecyclerView.ViewHolder){
+    override fun delete(holder: RecyclerView.ViewHolder) {
         val ref = FirebaseDatabase.getInstance().getReference("Equipment")
-        val equipment=myAdapter.items[holder.adapterPosition]
-        if(equipment.orders.isEmpty()) {
-            ref.child(equipment.id).removeValue()
-            myAdapter.notifyItemRemoved(holder.adapterPosition)
-        }else
-        {
-            myAdapter.notifyItemChanged(holder.adapterPosition)
-            Snackbar.make(view as View, R.string.eq_with_order, Snackbar.LENGTH_LONG).show()
-        }
+        val equipment = myAdapter.items[holder.adapterPosition]
+
+        ref.child(equipment.id).removeValue()
+        myAdapter.notifyItemRemoved(holder.adapterPosition)
+
     }
 
     override fun edit(holder: RecyclerView.ViewHolder) {
-        val item=myAdapter.items[holder.adapterPosition]
+        val item = myAdapter.items[holder.adapterPosition]
         val intent = Intent(activity, ShowEquipmentActivity::class.java)
         intent.putExtra("id", item.id)
         intent.putExtra("name", item.name)
