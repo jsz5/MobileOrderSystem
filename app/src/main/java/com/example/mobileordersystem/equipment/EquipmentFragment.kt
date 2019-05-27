@@ -21,7 +21,6 @@ import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.fragment_equipment.*
 
 
-
 class EquipmentFragment : AbstractSwipe() {
 
     private val TAG = "EquipmentFragment"
@@ -35,6 +34,7 @@ class EquipmentFragment : AbstractSwipe() {
     companion object {
         fun newInstance(): EquipmentFragment = EquipmentFragment()
     }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         return inflater.inflate(R.layout.fragment_equipment, container, false)
@@ -50,7 +50,7 @@ class EquipmentFragment : AbstractSwipe() {
         eqContainer.layoutManager = LinearLayoutManager(context)
         eqContainer.adapter = myAdapter
         eqContainer.itemAnimator = DefaultItemAnimator()
-        addEquipment.setOnClickListener{
+        addEquipment.setOnClickListener {
             val intent = Intent(context, CreateEquipment::class.java)
             startActivity(intent)
         }
@@ -89,7 +89,7 @@ class EquipmentFragment : AbstractSwipe() {
     }
 
     private fun search() {
-        if(searchInput != null) {
+        if (searchInput != null) {
             searchPattern = searchInput.text.toString()
             if (searchPattern.isBlank()) {
                 equipmentList.clear()
@@ -112,7 +112,7 @@ class EquipmentFragment : AbstractSwipe() {
 
     private fun copyEquipment() {
         equipmentListCopy.clear()
-        for(order in  equipmentList) {
+        for (order in equipmentList) {
             equipmentListCopy.add(order)
         }
     }
@@ -128,6 +128,7 @@ class EquipmentFragment : AbstractSwipe() {
                     search()
                     myAdapter.notifyDataSetChanged()
                 }
+
                 override fun onCancelled(databaseError: DatabaseError) {
                     println("loadPost:onCancelled ${databaseError.toException()}")
                 }
@@ -137,21 +138,17 @@ class EquipmentFragment : AbstractSwipe() {
     }
 
 
-    override fun delete(holder: RecyclerView.ViewHolder){
+    override fun delete(holder: RecyclerView.ViewHolder) {
         val ref = FirebaseDatabase.getInstance().getReference("Equipment")
-        val equipment=myAdapter.items[holder.adapterPosition]
-        if(equipment.orders.isEmpty()) {
-            ref.child(equipment.id).removeValue()
-            myAdapter.notifyItemRemoved(holder.adapterPosition)
-        }else
-        {
-            myAdapter.notifyItemChanged(holder.adapterPosition)
-            Snackbar.make(view as View, R.string.eq_with_order, Snackbar.LENGTH_LONG).show()
-        }
+        val equipment = myAdapter.items[holder.adapterPosition]
+
+        ref.child(equipment.id).removeValue()
+        myAdapter.notifyItemRemoved(holder.adapterPosition)
+       
     }
 
     override fun edit(holder: RecyclerView.ViewHolder) {
-        val item=myAdapter.items[holder.adapterPosition]
+        val item = myAdapter.items[holder.adapterPosition]
         val intent = Intent(activity, ShowEquipmentActivity::class.java)
         intent.putExtra("id", item.id)
         intent.putExtra("name", item.name)
