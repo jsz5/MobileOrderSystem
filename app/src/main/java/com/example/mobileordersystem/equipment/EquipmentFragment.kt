@@ -144,7 +144,7 @@ class EquipmentFragment : AbstractSwipe() {
 
         ref.child(equipment.id).removeValue()
         myAdapter.notifyItemRemoved(holder.adapterPosition)
-       
+
     }
 
     override fun edit(holder: RecyclerView.ViewHolder) {
