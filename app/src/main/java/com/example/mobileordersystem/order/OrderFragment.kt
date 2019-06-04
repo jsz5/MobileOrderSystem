@@ -188,7 +188,7 @@ class OrderFragment : AbstractSwipe() {
     }
 
     override fun edit(holder: RecyclerView.ViewHolder) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        myAdapter.notifyDataSetChanged()
     }
 
     private fun updateEquipment(order: Order) {
