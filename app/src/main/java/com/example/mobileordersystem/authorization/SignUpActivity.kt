@@ -11,7 +11,7 @@ import android.widget.Toast
 import com.example.mobileordersystem.HomeActivity
 import com.example.mobileordersystem.R
 import com.google.firebase.auth.FirebaseAuth
-import kotlinx.android.synthetic.main.sign_in.*
+import kotlinx.android.synthetic.main.sign_up.*
 import com.google.firebase.auth.UserProfileChangeRequest
 
 
@@ -44,7 +44,7 @@ class SignUpActivity : AbstractValidation() {
     }
 
     private fun createAccount() {
-        findViewById<ProgressBar>(R.id.progressBar).visibility=View.VISIBLE
+        progressBar2.visibility = View.VISIBLE
 
         mAuth!!.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->

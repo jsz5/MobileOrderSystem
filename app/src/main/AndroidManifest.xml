@@ -18,8 +18,9 @@
         <activity android:name=".authorization.ChangePasswordActivity" />
         <activity android:name=".authorization.SignUpActivity" />
         <activity android:name=".authorization.ForgotPasswordActivity" />
-        <activity android:name=".MainActivity" />
-        <activity android:name=".HomeActivity" />
+        <activity
+            android:name=".HomeActivity"
+            android:configChanges="orientation" />
         <activity android:name=".authorization.SignInActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,20 +30,19 @@
         </activity>
 
 
+        <!-- TODO Cloud Messaging
+        <service android:name=".MyFirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
 
-<!-- TODO Cloud Messaging
-<service android:name=".MyFirebaseMessagingService">
-    <intent-filter>
-        <action android:name="com.google.firebase.MESSAGING_EVENT"/>
-    </intent-filter>
-</service>
-
-<service android:name=".FirebaseIDService">
-    <intent-filter>
-        <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
-    </intent-filter>
-</service>
--->
+        <service android:name=".FirebaseIDService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+            </intent-filter>
+        </service>
+        -->
 
     </application>
 
